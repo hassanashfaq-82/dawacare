@@ -734,8 +734,7 @@ header {
 
 /* Left Content */
 .hero-text {
-  padding: 40px;
-  width: 50%;
+  padding: 40px 0px 40px 60px;  width: 50%;
 }
 
 .hero-text .brand-tagline {
@@ -1909,7 +1908,7 @@ O .store-link a {
   }
 
   .hero-text {
-    padding: 40px 40px 0px 40px;
+    padding: 40px 40px 0px 60px;
     width: 50%;
   }
 
@@ -2329,6 +2328,18 @@ O .store-link a {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 0 20px;
+  }
+}
+
+
+@media (max-width : 960px){
+  .hero-content{
+    flex-direction: column;
+    flex-flow: column-reverse;
+  }
+  .hero-text{
+    width: 100%;
+    text-align: center;
   }
 }
 
