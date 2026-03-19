@@ -488,6 +488,15 @@ header {
 /* Tablet Styles (768px - 1024px) */
 @media screen and (max-width: 1024px) {
 
+  header{
+    left: 10px;
+    right: 10px;
+  }
+
+  .card-image-box{
+    height: 250x !important;
+  }
+
   .hero-section {
     margin-top: 70px;
   }
@@ -537,6 +546,9 @@ header {
 
 
 @media screen and (max-width: 768px) {
+  .card-image-box{
+    height: 220px !important;
+  }
 
   /* Hero Content */
   body {
@@ -622,8 +634,18 @@ header {
 
 /* Small Mobile Styles (below 480px) */
 @media screen and (max-width: 480px) {
+
+
+  .card-image-box{
+    height: 200px !important;
+  }
   .hero-text {
     width: 100% !important
+  }
+  .brand-tagline,
+  .hero-subtitle,
+  .hero-title {
+    font-size: 18px !important;
   }
 
   .logo img {
@@ -665,6 +687,26 @@ header {
 
   .cta-heading {
     font-size: 30px;
+  }
+
+
+
+
+  /* cart page css */
+  .cart-drawer{
+    width: 320px !important;
+  }
+
+  .cart-item-info h4{
+    font-size: 13px !important;
+  }
+
+  .clear-btn, .checkout-btn{
+    font-size: 13px !important;
+  }
+
+  .see-all{
+    font-size: 13px !important;
   }
 }
 
@@ -1096,7 +1138,6 @@ header {
 
 .rating {
   color: #FFBE00;
-  margin-bottom: 5px;
 }
 
 .product-name {
@@ -1328,6 +1369,7 @@ header {
   width: 100%;
   height: 100%;
   border-radius: 30px;
+  object-fit: cover;
 
 }
 
@@ -1338,7 +1380,7 @@ header {
 .gallery {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content:  space-between;
   gap: 10px;
 }
 
@@ -1402,12 +1444,6 @@ header {
   margin: 0;
 }
 
-.rating {
-  color: #FFBE00;
-  /* Gold stars */
-  font-size: 18px;
-  margin-bottom: 15px;
-}
 
 .testimonial-text {
   font-size: 14px;
@@ -1422,7 +1458,6 @@ header {
 .news-section {
   width: 100%;
   justify-content: center;
-  padding: 60px 0;
 }
 
 /* Grid Layout */
@@ -1626,7 +1661,7 @@ O .store-link a {
 /* FAQ SECTION */
 /* FAQ Section Container */
 .faq-section {
-  padding: 100px 0;
+  padding: 50px 0;
   width: 100%;
   justify-content: center;
 }
@@ -1869,10 +1904,6 @@ O .store-link a {
 
 @media (max-width: 1024px) {
 
-  body {
-    padding: 10px 20px;
-
-  }
 
   /* category list */
   .lis {
@@ -2047,6 +2078,10 @@ O .store-link a {
       display: none;
     }
 
+    .hero-text{
+      padding: 20px 0px 0px 0px;
+    }
+
   }
 
 
@@ -2115,13 +2150,19 @@ O .store-link a {
     flex-flow: column-reverse;
 
   }
+  .hero-text .brand-tagline,.hero-subtitle,.hero-title{
+    font-size: 22px;
+  }
+  .hero-text .hero-subtitle {
+    font-size: 22px;
+  }
 
   .hero-text {
     width: 100%;
   }
 
   .hero-text .hero-title {
-    font-size: 30px;
+    font-size: 22px;
   }
 
   /* features section */
@@ -2305,6 +2346,15 @@ O .store-link a {
 
   }
 
+  .product-name{
+    font-size: 14px;
+  }
+  .brand-name{
+    font-size: 14px;
+  }
+  .new-price {
+    font-size: 15px;
+  }
   .hero-text {
     width: 100%;
   }
@@ -2315,8 +2365,11 @@ O .store-link a {
 /* Products Grid Layout */
 .products-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* min-width matches card */
-  gap: 35px; /* space between cards */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* auto-fit adapts better */
+  gap: 2rem; /* use rem for scalable spacing */
+  padding: 1rem; /* optional: inner spacing */
+  justify-items: center; /* centers items inside each grid cell */
+  align-items: stretch; /* ensures all cards have equal height */
 }
 .products-container a{
   text-decoration: none;
@@ -2324,11 +2377,10 @@ O .store-link a {
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  .products-container {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 0 20px;
+  .website-layout{
+    padding:0px 10px 10px 10px ;
   }
+ 
 }
 
 
@@ -2336,26 +2388,11 @@ O .store-link a {
   .hero-content{
     flex-direction: column;
     flex-flow: column-reverse;
+    padding: 20px;
   }
   .hero-text{
     width: 100%;
     text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .products-container {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 18px;
-    padding: 0 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .products-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    padding: 0 10px;
   }
 }
 
@@ -2389,6 +2426,20 @@ O .store-link a {
 .add-to-cart-btn:hover {
   background: #a91820;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* CART PAGE - AESTHETIC RED, BLACK, WHITE THEME */
 
@@ -2635,6 +2686,12 @@ O .store-link a {
 .cart-items::-webkit-scrollbar-track {
   background: #ffffff;
 }
+
+
+
+
+
+
 
 /*PRODUCT DETAILED VIEW  */
 .product-detail-container {
