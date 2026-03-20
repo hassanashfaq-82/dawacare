@@ -634,7 +634,9 @@ header {
 
 /* Small Mobile Styles (below 480px) */
 @media screen and (max-width: 480px) {
-
+  .header{
+    top: 0px !important;
+  }
 
   .card-image-box{
     height: 200px !important;
@@ -3014,99 +3016,4 @@ O .store-link a {
 .checkout-left textarea::placeholder {
   color: #000000;
   opacity: 0.5;
-}
-
-
-
-/* LOGIN PAGE */
-/* Page Background */
-.login-page {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-/* Login Card */
-.login-card {
-  background: #ffffff;
-  width: 100%;
-  max-width: 420px;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-}
-
-/* Title */
-.login-title {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #D2222D;
-  font-size: 32px;
-  font-weight: 700;
-}
-
-/* Input Group */
-.input-group {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.input-group label {
-  margin-bottom: 6px;
-  font-weight: 500;
-  color: #000;
-}
-
-/* Input Fields */
-.input-group input {
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 15px;
-  outline: none;
-  transition: 0.3s;
-}
-
-/* Input Focus */
-.input-group input:focus {
-  border-color: #D2222D;
-  box-shadow: 0 0 4px rgba(210,34,45,0.4);
-}
-
-/* Login Button */
-.login-page-btn {
-  width: 100%;
-  padding: 13px;
-  background: #D2222D;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-  display: block;
-  margin: auto;
-}
-
-/* Button Hover */
-.login-btn:hover {
-  background: #a81b23;
-  transform: translateY(-2px);
-}
-
-/* Responsive */
-@media (max-width: 500px) {
-
-  .login-card {
-    padding: 30px 25px;
-  }
-
-  .login-title {
-    font-size: 26px;
-  }
-
 }
