@@ -10,10 +10,8 @@ import ProductDetailedView from "./Pages/ProductDetailedView";
 import CheckoutPage from "./Pages/CheckoutPage";
 import Login from "./Pages/Login";
 import ProtectedRoute from "./Components/ProtectedRoute";
-
 // Admin panel
 import Dashboard from "./AdminPanel/Dashoard";
-
 // Cart
 import Cart from "./Components/Cart";
 
