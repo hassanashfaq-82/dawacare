@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../contexts/CartContext"; // ⭐ added
+import { useCart } from "../contexts/CartContext";
+import { useSiteInfo, DEFAULT_SITE_INFO } from "../contexts/SiteInfoContext";
 
 function Header() {
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
-  const { cart, setIsCartOpen } = useCart(); // ⭐ added
+  const { cart, setIsCartOpen } = useCart();
+  const { siteInfo } = useSiteInfo();
+  const logoURL = siteInfo?.logoURL || DEFAULT_SITE_INFO.logoURL;
 
   const toggleMobileMenu = () => {
     setMobileMenuActive(!mobileMenuActive);
@@ -22,7 +25,7 @@ function Header() {
         <div className="header-container">
           {/* Logo */}
           <Link to="/" className="logo">
-            <img src="/assets/Images/Frame 8.png" alt="Logo" />
+            <img src={logoURL} alt="Logo" />
           </Link>
 
           {/* Mobile Cart Button — visible only on mobile, before hamburger */}

@@ -6,6 +6,8 @@ import { doc, onSnapshot, setDoc } from "firebase/firestore";
 const SiteInfoContext = createContext(null);
 
 export const DEFAULT_SITE_INFO = {
+  logoURL: "/assets/Images/Frame 8.png",
+  footerLogoURL: "/assets/Images/footer logo.png",
   slides: [
     {
       tagline: "HealthCare sa mily Gi",
@@ -48,6 +50,8 @@ export function SiteInfoProvider({ children }) {
       if (snap.exists()) {
         const data = snap.data();
         setSiteInfo({
+          logoURL: data.logoURL || DEFAULT_SITE_INFO.logoURL,
+          footerLogoURL: data.footerLogoURL || DEFAULT_SITE_INFO.footerLogoURL,
           slides: data.slides || DEFAULT_SITE_INFO.slides,
           contact: data.contact || DEFAULT_SITE_INFO.contact,
         });

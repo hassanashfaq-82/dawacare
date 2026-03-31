@@ -8,6 +8,8 @@ const SLIDE_LABELS = ["Slide 1", "Slide 2", "Slide 3"];
 function BusinessInfo() {
   const { siteInfo, loading, saveSiteInfo } = useSiteInfo();
 
+  const [logoURL, setLogoURL] = useState(DEFAULT_SITE_INFO.logoURL);
+  const [footerLogoURL, setFooterLogoURL] = useState(DEFAULT_SITE_INFO.footerLogoURL);
   const [slides, setSlides] = useState(DEFAULT_SITE_INFO.slides);
   const [contact, setContact] = useState(DEFAULT_SITE_INFO.contact);
   const [saving, setSaving] = useState(false);
@@ -15,6 +17,8 @@ function BusinessInfo() {
   // Sync local state when Firestore data loads
   useEffect(() => {
     if (!loading) {
+      setLogoURL(siteInfo.logoURL);
+      setFooterLogoURL(siteInfo.footerLogoURL);
       setSlides(siteInfo.slides);
       setContact(siteInfo.contact);
     }
@@ -32,7 +36,7 @@ function BusinessInfo() {
     e.preventDefault();
     setSaving(true);
     try {
-      await saveSiteInfo({ slides, contact });
+      await saveSiteInfo({ logoURL, footerLogoURL, slides, contact });
       toast.success("Business info saved successfully");
     } catch (err) {
       console.error(err);
@@ -61,6 +65,88 @@ function BusinessInfo() {
         <p style={{ color: "#888", marginBottom: "24px", fontSize: "14px" }}>
           Changes are saved to the database and reflected on the website immediately.
         </p>
+
+        {/* ── App Logo ── */}
+        <h3 style={{ marginBottom: "16px", color: "#d2222d", borderBottom: "2px solid #d2222d", paddingBottom: "6px" }}>
+          <i className="fa-solid fa-star" style={{ marginRight: "8px" }}></i>
+          App Logo
+        </h3>
+
+        <div
+          style={{
+            border: "1px solid #e0e0e0",
+            borderRadius: "10px",
+            padding: "20px",
+            marginBottom: "28px",
+            background: "#fafafa",
+          }}
+        >
+          <div className="upload-form" style={{ display: "grid", gap: "12px" }}>
+            <div className="form-group">
+              <label>Logo Image URL</label>
+              <input
+                type="text"
+                value={logoURL || ""}
+                onChange={(e) => setLogoURL(e.target.value)}
+                placeholder="Paste logo image link here"
+              />
+            </div>
+            {logoURL && (
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <span style={{ fontSize: "13px", color: "#888" }}>Preview (on header):</span>
+                <div style={{ background: "#ffffff", border: "1px solid #e0e0e0", borderRadius: "8px", padding: "8px 16px", display: "flex", alignItems: "center" }}>
+                  <img
+                    src={logoURL}
+                    alt="Logo preview"
+                    style={{ height: "40px", maxWidth: "150px", objectFit: "contain" }}
+                    onError={(e) => { e.target.style.display = "none"; }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── Footer Logo ── */}
+        <h3 style={{ marginBottom: "16px", color: "#d2222d", borderBottom: "2px solid #d2222d", paddingBottom: "6px" }}>
+          <i className="fa-solid fa-star-half-stroke" style={{ marginRight: "8px" }}></i>
+          Footer Logo
+        </h3>
+
+        <div
+          style={{
+            border: "1px solid #e0e0e0",
+            borderRadius: "10px",
+            padding: "20px",
+            marginBottom: "28px",
+            background: "#fafafa",
+          }}
+        >
+          <div className="upload-form" style={{ display: "grid", gap: "12px" }}>
+            <div className="form-group">
+              <label>Footer Logo Image URL</label>
+              <input
+                type="text"
+                value={footerLogoURL || ""}
+                onChange={(e) => setFooterLogoURL(e.target.value)}
+                placeholder="Paste footer logo image link here"
+              />
+            </div>
+            {footerLogoURL && (
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <span style={{ fontSize: "13px", color: "#888" }}>Preview (on footer):</span>
+                <div style={{ background: "#d32f2f", borderRadius: "8px", padding: "8px 16px", display: "flex", alignItems: "center" }}>
+                  <img
+                    src={footerLogoURL}
+                    alt="Footer logo preview"
+                    style={{ height: "40px", maxWidth: "150px", objectFit: "contain" }}
+                    onError={(e) => { e.target.style.display = "none"; }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* ── Hero Slides ── */}
         <h3 style={{ marginBottom: "16px", color: "#d2222d", borderBottom: "2px solid #d2222d", paddingBottom: "6px" }}>

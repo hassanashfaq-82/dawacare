@@ -5,6 +5,7 @@ import { useSiteInfo, DEFAULT_SITE_INFO } from "../contexts/SiteInfoContext";
 function Footer() {
   const { siteInfo } = useSiteInfo();
   const contact = siteInfo?.contact || DEFAULT_SITE_INFO.contact;
+  const footerLogoURL = siteInfo?.footerLogoURL || DEFAULT_SITE_INFO.footerLogoURL;
 
   return (
     <footer className="main-footer">
@@ -12,7 +13,7 @@ function Footer() {
         {/* Brand Info */}
         <div className="footer-column brand-info">
           <div className="footer-logo">
-            <img src="/assets/Images/footer logo.png" alt="Health Care Logo" />
+            <img src={footerLogoURL} alt="Health Care Logo" />
             <h2></h2>
           </div>
           <p>
