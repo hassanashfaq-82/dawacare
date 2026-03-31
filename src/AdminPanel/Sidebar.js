@@ -79,6 +79,18 @@ const Sidebar = () => {
               </Link>
             </li>
 
+            <li className={location.pathname === "/admin/BusinessInfo" ? "active" : ""}>
+              <Link to="/admin/BusinessInfo">
+                <span className="menu-text">Business Info</span>
+              </Link>
+            </li>
+
+            <li className={location.pathname === "/admin/AddProduct" ? "active" : ""}>
+              <Link to="/admin/AddProduct">
+                <span className="menu-text">Add Product</span>
+              </Link>
+            </li>
+
             <li className={location.pathname === "/admin/UploadProducts" ? "active" : ""}>
               <Link to="/admin/UploadProducts">
                 <span className="menu-text">Manage Products</span>

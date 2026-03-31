@@ -6,6 +6,8 @@ import DashboardHome from "./DashboardHome";
 import Orders from "./Orders";
 import Users from "./Users";
 import UploadProducts from "./UploadProducts";
+import AddProduct from "./AddProduct";
+import BusinessInfo from "./BusinessInfo";
 
 const Dashboard = () => {
   return (
@@ -22,7 +24,9 @@ const Dashboard = () => {
           {/* Admin pages */}
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
-          <Route path = "UploadProducts" element={<UploadProducts/>}/>
+          <Route path="UploadProducts" element={<UploadProducts/>}/>
+          <Route path="AddProduct" element={<AddProduct/>}/>
+          <Route path="BusinessInfo" element={<BusinessInfo/>}/>
         </Routes>
       </div>
     </div>

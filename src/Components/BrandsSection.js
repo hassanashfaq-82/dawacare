@@ -30,7 +30,7 @@ function BrandsSection() {
         breakpoints: {
           0: { slidesPerView: 2 },
           576: { slidesPerView: 3 },
-          992: { slidesPerView: 5 },
+          992: { slidesPerView: 6 },
         },
       });
     }
@@ -49,7 +49,7 @@ function BrandsSection() {
           <h2 className="section-title">
             Featured <span className="text-red big-span">Brand</span>
           </h2>
-      
+
         </div>
 
         {/* SWIPER */}
@@ -114,10 +114,39 @@ function BrandsSection() {
                 <p className="brand-name">Panadol</p>
               </div>
             </div>
+            {/* Slide 7 */}
+            <div className="swiper-slide brand-slide">
+              <div className="brand-item">
+                <div className="brand-circle">
+                  <img src="./assets/Images/Ellipse 1.png" alt="Panadol" />
+                </div>
+                <p className="brand-name">Panadol</p>
+              </div>
+            </div>
+
+            {/* Slide 8 */}
+            <div className="swiper-slide brand-slide">
+              <div className="brand-item">
+                <div className="brand-circle">
+                  <img src="./assets/Images/Ellipse 1 (5).png" alt="AbbVie" />
+                </div>
+                <p className="brand-name">AbbVie</p>
+              </div>
+            </div>
+
+            {/* Slide 9 */}
+            <div className="swiper-slide brand-slide">
+              <div className="brand-item">
+                <div className="brand-circle">
+                  <img src="./assets/Images/Ellipse 1.png" alt="Panadol" />
+                </div>
+                <p className="brand-name">Panadol</p>
+              </div>
+            </div>
           </div>
 
           {/* Pagination */}
-       </div>
+        </div>
       </div>
     </section>
   );

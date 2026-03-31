@@ -15,7 +15,7 @@
 }
 
 .website-layout {
-  padding: 20px 70px 0px 70px;
+  padding: 0px 60px 0px 60px;
 }
 
 h1,
@@ -97,7 +97,7 @@ body {
 /* Header Styles */
 header {
   position: fixed;
-  top: 20px;
+  top: 0px;
   /* same as body top padding */
   left: 70px;
   /* same as body left padding */
@@ -151,7 +151,9 @@ header {
 /* Search Bar */
 .search-bar {
   display: flex;
-  width: 645.72px;
+  flex: 1;
+  min-width: 0;
+  max-width: 646px;
   align-items: center;
   justify-content: space-between;
   border: 0.8px solid #838b9c;
@@ -164,6 +166,8 @@ header {
   display: flex;
   align-items: center;
   gap: 15px;
+  min-width: 0;
+  flex: 1;
 }
 
 .category-select {
@@ -186,6 +190,8 @@ header {
   border-left: 0.8px solid #838b9c;
   height: 24px;
   width: 250px;
+  min-width: 0;
+  flex: 1;
 }
 
 .search-btn {
@@ -492,6 +498,21 @@ header {
   margin-top: 10px;
 }
 
+/* Mid-range squeeze zone (1024px - 1150px) */
+@media screen and (max-width: 1150px) {
+  .location {
+    display: none;
+  }
+
+  .icon-link span {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+}
+
 /* Tablet Styles (768px - 1024px) */
 @media screen and (max-width: 1024px) {
   header {
@@ -512,11 +533,7 @@ header {
   }
 
   .header-container {
-    gap: 15px;
-  }
-
-  .search-bar {
-    width: 400px;
+    gap: 10px;
   }
 
   .category-nav {
@@ -524,15 +541,11 @@ header {
   }
 
   .search-input {
-    width: 180px;
+    width: 120px;
   }
 
   .header-actions {
-    gap: 12px;
-  }
-
-  .icon-link span {
-    display: inline;
+    gap: 8px;
   }
 
   .deals-title {
@@ -814,7 +827,7 @@ header {
 
 /* Left Content */
 .hero-text {
-  padding: 40px 0px 40px 60px;
+  padding: 40px 0px 40px 10px;
   width: 50%;
 }
 
@@ -970,8 +983,8 @@ header {
 .feature-icon {
   background-color: #d2222d;
   /* The red color from your design */
-  width: 34.7px;
-  height: 35.59px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1330,7 +1343,6 @@ header {
   width: 150px;
   /* Adjust based on your preference */
   height: 150px;
-  background-color: white;
   /* Light grey circle background */
   border-radius: 50%;
   display: flex;
@@ -1344,13 +1356,13 @@ header {
 
 .brand-circle:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .brand-circle img {
   max-width: 100%;
-  height: auto;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand-name {
@@ -1440,11 +1452,27 @@ header {
 .gallery {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 16px;
 }
 
 .gallery img {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gallery img {
+    width: 100%;
+    flex: none;
+  }
 }
 
 /* What Our Client Say" */
@@ -1937,10 +1965,6 @@ O .store-link a {
     display: none;
     font-size: 12px;
   }
-
-  .gallery img {
-    width: 50%;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -2009,18 +2033,6 @@ O .store-link a {
 
   .hot-offer-tag {
     width: fit-content;
-  }
-
-  /* Gallery */
-
-  .gallery {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .gallery img {
-    width: 100%;
   }
 
   /* feebacks */
@@ -2213,18 +2225,6 @@ O .store-link a {
     flex-direction: column;
   }
 
-  /* Gallery */
-
-  .gallery {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .gallery img {
-    width: 100%;
-  }
-
   /* feebacks */
 
   .testimonial-card {
@@ -2386,6 +2386,27 @@ O .store-link a {
 }
 .products-container a {
   text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .products-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .products-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Responsive adjustments */

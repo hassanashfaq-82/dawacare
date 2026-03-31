@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { SiteInfoProvider } from "./contexts/SiteInfoContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +18,7 @@ import Cart from "./Components/Cart";
 
 function App() {
   return (
+    <SiteInfoProvider>
     <div className="App">
 
       <ToastContainer
@@ -101,6 +103,7 @@ function App() {
       </Routes>
 
     </div>
+    </SiteInfoProvider>
   );
 }
 
