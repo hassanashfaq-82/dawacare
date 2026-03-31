@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSiteInfo, DEFAULT_SITE_INFO } from "../contexts/SiteInfoContext";
 
 function Footer() {
+  const { siteInfo } = useSiteInfo();
+  const contact = siteInfo?.contact || DEFAULT_SITE_INFO.contact;
+
   return (
     <footer className="main-footer">
       <div className="footer-container">
@@ -43,8 +47,8 @@ function Footer() {
         {/* Contact & Social */}
         <div className="footer-column contact-social">
           <h3>Contact Us</h3>
-          <p><i className="phone-icon"></i> +06323839204</p>
-          <p><i className="phone-icon"></i> +06378010848</p>
+          <p><i className="phone-icon"></i> {contact.phone1}</p>
+          <p><i className="phone-icon"></i> {contact.phone2}</p>
 
           <h3>Social Media</h3>
           <div className="social-icons">

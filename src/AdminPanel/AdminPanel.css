@@ -1451,24 +1451,88 @@ body {
   .action-cell { flex-wrap: wrap; }
 }
 
+/* ── Products card layout on small screens ── */
+@media (max-width: 640px) {
+  .table-scroll-wrapper {
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .products-table {
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Hide table header */
+  .products-table thead { display: none; }
+
+  /* Each row becomes a card */
+  .products-table tbody { display: flex; flex-direction: column; gap: 12px; }
+
+  .products-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .products-table tbody tr.row-being-edited {
+    border-color: #f5c0c8;
+    background: var(--red-light);
+  }
+
+  .products-table tbody tr:hover { background: var(--white); }
+
+  /* Each cell becomes a labelled row */
+  .products-table td {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .products-table td:last-child { border-bottom: none; padding-bottom: 0; }
+  .products-table td:first-child { padding-top: 0; }
+
+  /* Data labels via data-label attribute (added in JSX) */
+  .products-table td::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-text);
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  /* Image cell - no label, just the image */
+  .products-table td:first-child { justify-content: flex-start; }
+  .products-table td:first-child::before { display: none; }
+
+  .product-thumb { width: 60px; height: 60px; }
+
+  .truncate-cell {
+    max-width: unset;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    text-align: right;
+  }
+
+  .action-buttons { justify-content: flex-end; }
+}
+
 /* ── Print ── */
 @media print {
-  .admin-sidebar,
-  .sidebar-toggle,
-  .filters,
-  .slip-print-btn,
-  .slip-close { display: none !important; }
-
-  .dashboard-content { padding: 0; }
-
-  .modal-overlay {
-    position: static;
-    background: none;
-    padding: 0;
-  }
-
-  .modal-slip {
-    box-shadow: none;
-    max-height: none;
-  }
+  /* Print happens in a dedicated popup window, nothing to hide here */
 }

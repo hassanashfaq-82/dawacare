@@ -269,12 +269,12 @@ function UploadProducts() {
                         className="product-thumb"
                         onError={(e) => { e.target.src = "https://via.placeholder.com/42"; }} />
                     </td>
-                    <td className="product-name-cell">{product.productName}</td>
-                    <td>{product.brandName || "—"}</td>
-                    <td className="price-new">₨{product.newPrice}</td>
-                    <td className="truncate-cell">{product.description || "—"}</td>
-                    <td className="truncate-cell">{product.usageInstructions || "—"}</td>
-                    <td>
+                    <td data-label="Product" className="product-name-cell">{product.productName}</td>
+                    <td data-label="Brand">{product.brandName || "—"}</td>
+                    <td data-label="Price" className="price-new">₨{product.newPrice}</td>
+                    <td data-label="Description" className="truncate-cell">{product.description || "—"}</td>
+                    <td data-label="Usage" className="truncate-cell">{product.usageInstructions || "—"}</td>
+                    <td data-label="Actions">
                       <div className="action-buttons">
                         <button className="edit-btn" onClick={() => startEdit(product)}>
                           <i className="fa-solid fa-pen"></i> Edit

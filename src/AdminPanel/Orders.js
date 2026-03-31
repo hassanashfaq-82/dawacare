@@ -335,7 +335,66 @@ const Orders = () => {
 
             <p className="slip-footer">Thank you for your order!</p>
 
-            <button className="slip-print-btn" onClick={() => window.print()}>
+            <button className="slip-print-btn" onClick={() => {
+              const slipEl = document.querySelector('.modal-slip');
+              if (!slipEl) return;
+              const printWindow = window.open('', '_blank', 'width=600,height=800');
+              printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                  <head>
+                    <title>Order Receipt</title>
+                    <style>
+                      * { margin: 0; padding: 0; box-sizing: border-box; }
+                      body { font-family: 'DM Sans', 'Segoe UI', sans-serif; color: #0f1117; -webkit-print-color-adjust: exact; }
+                      .modal-slip { padding: 24px; max-width: 460px; margin: 0 auto; }
+                      .slip-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+                      .slip-brand { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; }
+                      .slip-brand-dot { width: 10px; height: 10px; border-radius: 50%; background: #c90f2f; flex-shrink: 0; }
+                      .slip-close { display: none; }
+                      .slip-divider { height: 1px; background: #e2e2e2; margin: 14px 0; }
+                      .slip-divider.dashed { background: none; border-top: 2px dashed #e2e2e2; }
+                      .slip-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+                      .slip-title { font-size: 18px; font-weight: 700; }
+                      .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+                      .badge-processing { background: #fff3cd; color: #856404; }
+                      .badge-shipped { background: #e8f4fd; color: #0c5f9e; }
+                      .badge-cancelled { background: #f9e0e4; color: #c90f2f; }
+                      .badge-delivered { background: #e6f9ee; color: #1a7a40; }
+                      .slip-order-id { font-size: 12px; font-weight: 600; color: #c90f2f; margin-bottom: 4px; font-family: monospace; }
+                      .slip-date { font-size: 12px; color: #999; }
+                      .slip-section-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #c90f2f; margin-bottom: 10px; }
+                      .slip-info-grid { display: flex; flex-direction: column; gap: 8px; }
+                      .slip-info-row { display: flex; justify-content: space-between; font-size: 13px; gap: 12px; }
+                      .slip-info-key { color: #999; font-weight: 500; min-width: 70px; flex-shrink: 0; }
+                      .slip-info-val { color: #0f1117; font-weight: 500; text-align: right; }
+                      .slip-items-header { display: grid; grid-template-columns: 1fr 56px 80px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #aaa; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; margin-bottom: 8px; }
+                      .slip-items-header span:nth-child(2), .slip-items-header span:nth-child(3) { text-align: right; }
+                      .slip-item-row { display: grid; grid-template-columns: 1fr 48px auto; font-size: 13px; padding: 10px 0; border-bottom: 1px solid #f8f8f8; align-items: center; gap: 8px; }
+                      .slip-item-row span:nth-child(2) { text-align: right; }
+                      .slip-item-info { display: flex; align-items: center; gap: 10px; }
+                      .slip-item-img { width: 38px; height: 38px; border-radius: 6px; object-fit: cover; border: 1px solid #eee; flex-shrink: 0; }
+                      .slip-item-meta { display: flex; flex-direction: column; gap: 2px; }
+                      .slip-item-name { font-size: 13px; font-weight: 600; }
+                      .slip-item-brand { font-size: 11px; color: #999; }
+                      .slip-item-prices { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+                      .slip-item-new { font-size: 13px; font-weight: 600; }
+                      .slip-item-old { font-size: 11px; color: #aaa; text-decoration: line-through; }
+                      .slip-item-discount { font-size: 10px; font-weight: 700; color: #c90f2f; background: #f9e0e4; padding: 1px 6px; border-radius: 10px; }
+                      .slip-totals { display: flex; flex-direction: column; gap: 8px; }
+                      .slip-total-row { display: flex; justify-content: space-between; font-size: 13px; color: #555; }
+                      .total-final { font-size: 15px; font-weight: 700; color: #0f1117; }
+                      .slip-footer { text-align: center; font-size: 12px; color: #aaa; margin-bottom: 14px; }
+                      .slip-print-btn { display: none; }
+                    </style>
+                  </head>
+                  <body>${slipEl.innerHTML}</body>
+                </html>
+              `);
+              printWindow.document.close();
+              printWindow.focus();
+              setTimeout(() => { printWindow.print(); printWindow.close(); }, 300);
+            }}>
               🖨 Print Slip
             </button>
 

@@ -6,7 +6,6 @@ import {
   faXmark,
   faTrash,
   faCartShopping,
-  faDollarSign,
   faCircleMinus,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +16,8 @@ function Cart() {
     cart,
     removeFromCart,
     clearCart,
+    increaseQuantity,
+    decreaseQuantity,
     totalQuantity,
     totalPrice,
     isCartOpen,
@@ -37,8 +38,7 @@ function Cart() {
         {/* Header */}
         <div className="cart-header">
           <h3>
-            <FontAwesomeIcon icon={faCartShopping} /> Your Cart ({totalQuantity}
-            )
+            <FontAwesomeIcon icon={faCartShopping} /> Your Cart ({totalQuantity})
           </h3>
           <button className="close-btn" onClick={() => setIsCartOpen(false)}>
             <FontAwesomeIcon icon={faXmark} />
@@ -74,26 +74,59 @@ function Cart() {
               {cart.map((item) => (
                 <div className="cart-item" key={item.id}>
                   <img src={item.productImage} alt={item.productName} />
+
                   <div className="cart-item-info">
                     <h4>{item.productName}</h4>
-                    <p>Rs. {item.productPrice ?? item.newPrice}</p>
-                    <p>Qty: {item.quantity}</p>
+                    <p className="cart-item-price">
+                      Rs. {item.productPrice ?? item.newPrice}
+                    </p>
+
+                    {/* Quantity Controls */}
+                    <div className="cart-qty-controls">
+                      <button
+                        className="cart-qty-btn"
+                        onClick={() => decreaseQuantity(item.id)}
+                        title="Decrease"
+                      >
+                        <FontAwesomeIcon icon={faCircleMinus} />
+                      </button>
+                      <span className="cart-qty-value">{item.quantity}</span>
+                      <button
+                        className="cart-qty-btn"
+                        onClick={() => increaseQuantity(item.id)}
+                        title="Increase"
+                      >
+                        <FontAwesomeIcon icon={faCirclePlus} />
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromCart(item.id)}
-                    title="Remove item"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
+
+                  <div className="cart-item-right">
+                    <p className="cart-item-subtotal">
+                      Rs. {(item.productPrice ?? item.newPrice) * item.quantity}
+                    </p>
+                    <button
+                      className="remove-btn"
+                      onClick={() => removeFromCart(item.id)}
+                      title="Remove item"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
 
             {/* Cart Summary */}
             <div className="cart-summary">
-              <h4>Total Items: {totalQuantity}</h4>
-              <h3>Total Price: Rs. {totalPrice}</h3>
+              <div className="cart-summary-row">
+                <span>Total Items</span>
+                <span>{totalQuantity}</span>
+              </div>
+              <div className="cart-summary-row total">
+                <span>Total Price</span>
+                <span>Rs. {totalPrice}</span>
+              </div>
 
               <button className="clear-btn" onClick={clearCart}>
                 <FontAwesomeIcon icon={faTrash} /> Remove All
@@ -104,7 +137,6 @@ function Cart() {
                 className="checkout-btn"
                 onClick={() => setIsCartOpen(false)}
               >
-                <FontAwesomeIcon icon={faCirclePlus} />
                 Proceed to Checkout
               </Link>
             </div>

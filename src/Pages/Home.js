@@ -9,27 +9,27 @@ import FeatureProducts from '../Components/FeatureProducts';
 import CTABanner from '../Components/CTABanner';
 import Gallery from '../Components/Gallery';
 import Testimonials from '../Components/Testimonials';
-import NewsSection from '../Components/NewsSection';
+// import NewsSection from '../Components/NewsSection';
 import FAQSection from '../Components/FAQSection';
 import Footer from '../Components/Footer';
 
 const Home = () => {
   return (
     <div>
-        <Header/>
-      <CategoryNav/>
-      <HeroSection/>
-      <FeaturesBar/>
-      <ProductSlider/>
-      <BrandsSection/>
-      <FeatureProducts/>
-      <CTABanner/>
-      <Gallery/>
-      <Testimonials/>
-      <NewsSection/>
-      <FAQSection/>
-      <Footer/>
-      
+      <Header />
+      <CategoryNav />
+      <HeroSection />
+      <FeaturesBar />
+      <ProductSlider />
+      <BrandsSection />
+      <FeatureProducts />
+      <CTABanner />
+      <Gallery />
+      <Testimonials />
+      {/* <NewsSection/> */}
+      <FAQSection />
+      <Footer />
+
     </div>
   )
 }

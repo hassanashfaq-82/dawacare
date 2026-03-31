@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
       return [...prev, { ...product, quantity: 1 }];
     });
 
-    // setIsCartOpen(true); // open drawer automatically
+    setIsCartOpen(true);
   };
 
   // Remove single product

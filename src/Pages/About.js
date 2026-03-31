@@ -26,7 +26,7 @@ const About = () => {
         </p>
 
         <h2 style={{ marginTop: "40px", color: "#d2222d" }}>Why Choose Dawacare?</h2>
-        <ul style={{ lineHeight: "1.8" }}>
+        <ul style={{ lineHeight: "1.8", paddingLeft: "20px", marginTop: "10px" }}>
           <li><strong>Easy Ordering:</strong> A user-friendly platform to search, select, and order products in minutes.</li>
           <li><strong>Fast Delivery:</strong> Quick, safe, and tracked delivery right to your doorstep.</li>
           <li><strong>Expert Guidance:</strong> Assistance and information on proper usage of medicines and supplements.</li>
@@ -34,7 +34,7 @@ const About = () => {
         </ul>
 
         <h2 style={{ marginTop: "40px", color: "#d2222d" }}>Our Values</h2>
-        <ul style={{ lineHeight: "1.8" }}>
+        <ul style={{ lineHeight: "1.8", paddingLeft: "20px", marginTop: "10px" }}>
           <li><strong>Integrity:</strong> Honesty in every transaction and product we offer.</li>
           <li><strong>Customer-Centric:</strong> The needs and health of our customers are our top priority.</li>
           <li><strong>Innovation:</strong> Continuously improving our platform for the best healthcare experience.</li>

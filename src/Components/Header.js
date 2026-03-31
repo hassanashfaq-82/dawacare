@@ -25,6 +25,33 @@ function Header() {
             <img src="/assets/Images/Frame 8.png" alt="Logo" />
           </Link>
 
+          {/* Mobile Cart Button — visible only on mobile, before hamburger */}
+          <button
+            className="mobile-cart-btn"
+            onClick={() => setIsCartOpen(true)}
+            aria-label="Open cart"
+          >
+            <span className="cart-icon-wrap">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              {cart.length > 0 && (
+                <span className="cart-badge">{cart.length}</span>
+              )}
+            </span>
+          </button>
+
           {/* Mobile Menu Toggle Button */}
           <button
             className="mobile-menu-toggle"
@@ -110,30 +137,28 @@ function Header() {
             {/* Cart */}
             <button
               className="icon-link cart-btn"
-              style={{ position: "relative" }}
               onClick={() => setIsCartOpen(true)}
             >
-              {/* Cart Icon */}
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-
+              <span className="cart-icon-wrap">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                {cart.length > 0 && (
+                  <span className="cart-badge">{cart.length}</span>
+                )}
+              </span>
               <span>Cart</span>
-
-              {cart.length > 0 && (
-                <span className="cart-badge">{cart.length}</span>
-              )}
             </button>
             {/* Login Button */}
             <Link to ="/login" className="login-btn btn btn-danger">Login</Link>
