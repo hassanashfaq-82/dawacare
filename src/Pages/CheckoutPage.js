@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -16,17 +16,17 @@ const provinces = [
 ];
 
 const citiesByProvince = {
-  Punjab: ["Lahore","Faisalabad","Gujranwala"],
-  Sindh: ["Karachi","Hyderabad"],
-  "Khyber Pakhtunkhwa": ["Peshawar","Abbottabad"],
-  Balochistan: ["Quetta","Gwadar"],
+  Punjab: ["Lahore", "Faisalabad", "Gujranwala"],
+  Sindh: ["Karachi", "Hyderabad"],
+  "Khyber Pakhtunkhwa": ["Peshawar", "Abbottabad"],
+  Balochistan: ["Quetta", "Gwadar"],
   "Islamabad Capital Territory": ["Islamabad"],
-  "Gilgit-Baltistan": ["Gilgit","Skardu"],
-  "Azad Jammu and Kashmir": ["Muzaffarabad","Mirpur"]
+  "Gilgit-Baltistan": ["Gilgit", "Skardu"],
+  "Azad Jammu and Kashmir": ["Muzaffarabad", "Mirpur"]
 };
 
 const CheckoutPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { cart: cartItems, clearCart } = useCart();
 
   const [formData, setFormData] = useState({
@@ -54,12 +54,12 @@ const CheckoutPage = () => {
   // Complete order
   const completeOrder = async (e) => {
     e.preventDefault();
-  
+
     if (cartItems.length === 0) {
       toast.error("Cart is empty!");
       return;
     }
-  
+
     try {
       const orderData = {
         customerDetails: formData,
@@ -70,13 +70,13 @@ const CheckoutPage = () => {
         status: "Pending",
         createdAt: serverTimestamp(),
       };
-  
+
       await addDoc(collection(db, "orders"), orderData);
-  
+
       toast.success("Order placed successfully! 🎉");
-  
+
       clearCart();
-  
+
       // Reset form
       setFormData({
         firstName: "",
@@ -92,7 +92,7 @@ const CheckoutPage = () => {
         orderNotes: "",
         paymentMethod: "cod"
       });
-  
+
     } catch (error) {
       console.error(error);
       toast.error("Failed to place order ❌");
