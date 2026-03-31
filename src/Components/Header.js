@@ -136,7 +136,7 @@ function Header() {
               )}
             </button>
             {/* Login Button */}
-            <button className="login-btn btn btn-danger">Login</button>
+            <Link to ="/login" className="login-btn btn btn-danger">Login</Link>
           </div>
         </div>
       </header>
