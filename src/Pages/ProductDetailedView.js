@@ -36,34 +36,34 @@ const ProductDetailedView = () => {
       <div style={{ margin: "100px 0px" }} className="product-detail-container">
         {/* LEFT IMAGE */}
         <div className="product-detail-left">
-          <img src={product.productImage} alt={product.productName} />
+          <img src={product.picture} alt={product.name} />
         </div>
 
         {/* RIGHT INFO */}
         <div className="product-detail-right">
-          <h1>{product.productName}</h1>
-          <h3 className="brand">Brand: {product.brandName}</h3>
+          <h1>{product.name}</h1>
+          <h3 className="brand">Manufactured By: {product.manufacturedBy}</h3>
 
-          <p className="price">Rs. {product.newPrice}</p>
+          <p className="price">Rs. {product.price}</p>
 
           {/* Medicine Specific Info */}
           <div className="medicine-info">
-            <p><strong>Category:</strong> {product.category}</p>
-            <p><strong>Dosage Form:</strong> {product.dosageForm}</p>
-            <p><strong>Strength:</strong> {product.strength}</p>
-            <p><strong>Pack Size:</strong> {product.packSize}</p>
+            {product.formula && <p><strong>Formula:</strong> {product.formula}</p>}
+            {product.type && <p><strong>Type:</strong> {product.type}</p>}
+            {product.quantityPerPack > 0 && <p><strong>Quantity (Tabs/Pack):</strong> {product.quantityPerPack}</p>}
+            {product.discounts && <p><strong>Discounts:</strong> {product.discounts}</p>}
           </div>
 
           {/* Description */}
           <div className="description">
             <h4>Description</h4>
-            <p>{product.description}</p> {/* ✅ correct field */}
+            <p>{product.description}</p>
           </div>
 
           {/* Usage Instructions */}
           <div className="usage">
             <h4>Usage Instructions</h4>
-            <p>{product.usageInstructions}</p> {/* ✅ correct field */}
+            <p>{product.usage}</p>
           </div>
 
           {/* Quantity */}

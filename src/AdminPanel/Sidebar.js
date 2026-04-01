@@ -19,10 +19,10 @@ const Sidebar = () => {
   // Close sidebar when clicking outside on mobile
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (window.innerWidth <= 768 && 
-          isOpen && 
-          !event.target.closest('.admin-sidebar') && 
-          !event.target.closest('.sidebar-toggle')) {
+      if (window.innerWidth <= 768 &&
+        isOpen &&
+        !event.target.closest('.admin-sidebar') &&
+        !event.target.closest('.sidebar-toggle')) {
         setIsOpen(false);
       }
     };
@@ -79,12 +79,6 @@ const Sidebar = () => {
               </Link>
             </li>
 
-            <li className={location.pathname === "/admin/BusinessInfo" ? "active" : ""}>
-              <Link to="/admin/BusinessInfo">
-                <span className="menu-text">Business Info</span>
-              </Link>
-            </li>
-
             <li className={location.pathname === "/admin/AddProduct" ? "active" : ""}>
               <Link to="/admin/AddProduct">
                 <span className="menu-text">Add Product</span>
@@ -93,7 +87,19 @@ const Sidebar = () => {
 
             <li className={location.pathname === "/admin/UploadProducts" ? "active" : ""}>
               <Link to="/admin/UploadProducts">
-                <span className="menu-text">Manage Products</span>
+                <span className="menu-text">Products List</span>
+              </Link>
+            </li>
+
+            <li className={location.pathname === "/admin/ManageSale" ? "active" : ""}>
+              <Link to="/admin/ManageSale">
+                <span className="menu-text">Manage Sale</span>
+              </Link>
+            </li>
+
+            <li className={location.pathname === "/admin/BusinessInfo" ? "active" : ""}>
+              <Link to="/admin/BusinessInfo">
+                <span className="menu-text">Business Info</span>
               </Link>
             </li>
           </ul>

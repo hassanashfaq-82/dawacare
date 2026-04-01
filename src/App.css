@@ -288,22 +288,92 @@ header {
   border-radius: 8px;
 }
 
-/* Category Navigation */
+/* ── Sale Marquee Banner ── */
+.sale-marquee-bar {
+  width: 100%;
+  margin-top: 85px;
+  background: linear-gradient(90deg, #d2222d 0%, #b71c1c 50%, #d2222d 100%);
+  overflow: hidden;
+  padding: 20px 0px;
+  box-shadow: 0 2px 8px rgba(210, 34, 45, 0.25);
+}
 
-@media screen and (max-width: 1320px) {
-  .category-nav {
-    display: none !important;
+.marquee-track {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  animation: marquee-scroll 28s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-track:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
-.category-nav {
-  width: 100%;
-  display: flex;
-  margin-top: 85px;
 
-  justify-content: center;
-  padding: 16px 0px;
-  background-color: white;
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
+  padding: 0 28px;
+  letter-spacing: 0.4px;
 }
+
+.marquee-icon {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.marquee-discount {
+  background: white;
+  border-radius: 4px;
+  color: #d2222d;
+  padding: 2px 8px;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.marquee-dates {
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.marquee-sep {
+  opacity: 0.5;
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+@media (max-width: 768px) {
+  .sale-marquee-bar {
+    padding: 8px 0;
+  }
+  .marquee-item {
+    font-size: 13px;
+    padding: 0 20px;
+  }
+}
+
+/* Category Navigation (legacy, kept for reference) */
 
 .category-list {
   display: flex;
@@ -542,8 +612,8 @@ header {
     gap: 10px;
   }
 
-  .category-nav {
-    display: none;
+  .sale-marquee-bar {
+    margin-top: 70px;
   }
 
   .search-input {
@@ -788,7 +858,7 @@ header {
   padding: 5px;
   height: 40px;
   width: 40px;
-  color: black !important;
+  color: #d2222d !important;
   background-color: white;
   border-radius: 50%;
 }
@@ -1430,6 +1500,19 @@ header {
 }
 
 .cta-order-btn {
+  background-color: #d32f2f;
+  /* Red button */
+  color: white;
+  max-width: fit-content;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .cta-order-btn:hover {

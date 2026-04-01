@@ -739,7 +739,7 @@ body {
 
 .price-old {
   color: #aaa;
-  text-decoration: line-through;
+  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -1657,7 +1657,10 @@ body {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
   line-height: 1;
 }
 

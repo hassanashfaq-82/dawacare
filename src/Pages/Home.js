@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../Components/Header';
-import CategoryNav from '../Components/Categorynav';
+import SaleMarquee from '../Components/SaleMarquee';
 import HeroSection from '../Components/Herosection';
 import FeaturesBar from '../Components/Featuresbar';
 import ProductSlider from '../Components/Productslider';
@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <CategoryNav />
+      <SaleMarquee />
       <HeroSection />
       <FeaturesBar />
       <ProductSlider />

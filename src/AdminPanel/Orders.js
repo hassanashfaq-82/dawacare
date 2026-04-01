@@ -452,7 +452,7 @@ const Orders = () => {
                       .slip-item-brand { font-size: 11px; color: #999; }
                       .slip-item-prices { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
                       .slip-item-new { font-size: 13px; font-weight: 600; }
-                      .slip-item-old { font-size: 11px; color: #aaa; text-decoration: line-through; }
+                      .slip-item-old { font-size: 11px; color: #aaa; }
                       .slip-item-discount { font-size: 10px; font-weight: 700; color: #c90f2f; background: #f9e0e4; padding: 1px 6px; border-radius: 10px; }
                       .slip-totals { display: flex; flex-direction: column; gap: 8px; }
                       .slip-total-row { display: flex; justify-content: space-between; font-size: 13px; color: #555; }

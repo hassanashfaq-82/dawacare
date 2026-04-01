@@ -8,6 +8,7 @@ import Users from "./Users";
 import UploadProducts from "./UploadProducts";
 import AddProduct from "./AddProduct";
 import BusinessInfo from "./BusinessInfo";
+import ManageSale from "./ManageSale";
 
 const Dashboard = () => {
   return (
@@ -27,6 +28,7 @@ const Dashboard = () => {
           <Route path="UploadProducts" element={<UploadProducts/>}/>
           <Route path="AddProduct" element={<AddProduct/>}/>
           <Route path="BusinessInfo" element={<BusinessInfo/>}/>
+          <Route path="ManageSale" element={<ManageSale/>}/>
         </Routes>
       </div>
     </div>

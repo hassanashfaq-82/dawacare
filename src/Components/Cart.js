@@ -73,12 +73,12 @@ function Cart() {
             <div className="cart-items">
               {cart.map((item) => (
                 <div className="cart-item" key={item.id}>
-                  <img src={item.productImage} alt={item.productName} />
+                  <img src={item.picture} alt={item.name} />
 
                   <div className="cart-item-info">
-                    <h4>{item.productName}</h4>
+                    <h4>{item.name}</h4>
                     <p className="cart-item-price">
-                      Rs. {item.productPrice ?? item.newPrice}
+                      Rs. {item.price}
                     </p>
 
                     {/* Quantity Controls */}
@@ -103,7 +103,7 @@ function Cart() {
 
                   <div className="cart-item-right">
                     <p className="cart-item-subtotal">
-                      Rs. {(item.productPrice ?? item.newPrice) * item.quantity}
+                      Rs. {item.price * item.quantity}
                     </p>
                     <button
                       className="remove-btn"

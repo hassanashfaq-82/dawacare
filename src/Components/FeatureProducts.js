@@ -5,6 +5,7 @@ import { db } from "../firebase/firebase";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 import { useCart } from "../contexts/CartContext";
+import { useSale } from "../contexts/SaleContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +13,14 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 function FeatureProducts() {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+  const { sale } = useSale();
+
+  const getDiscountedPrice = (retailPrice) => {
+    if (sale.isActive && sale.discountPercent > 0 && retailPrice) {
+      return Math.round(retailPrice * (1 - sale.discountPercent / 100));
+    }
+    return null;
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -60,14 +69,17 @@ function FeatureProducts() {
           <div className="product-card" key={product.id}>
 
             <div className="card-image-box">
-              <span className="discount-badge">{product.discount}</span>
-              <img src={product.productImage} alt={product.productName} />
+              {sale.isActive && sale.discountPercent > 0 && (
+                <span className="discount-badge">{sale.discountPercent}%</span>
+              )}
+              <img src={product.picture} alt={product.name} />
 
               <button
                 className="add-cart-btn"
                 onClick={(e) => {
                   e.preventDefault();
-                  addToCart(product);
+                  const discountedPrice = getDiscountedPrice(product.retailPrice);
+                  addToCart({ ...product, price: discountedPrice ?? product.price });
                 }}
               >
                 <FontAwesomeIcon icon={faCartShopping} />
@@ -76,12 +88,18 @@ function FeatureProducts() {
 
             <div className="card-info">
               <div className="rating">★ ★ ★ ★</div>
-              <h4 className="product-name">{product.productName}</h4>
-              <p className="brand-name">{product.brandName}</p>
+              <h4 className="product-name">{product.name}</h4>
+              <p className="brand-name">{product.manufacturedBy}</p>
 
               <div className="price-container">
-                <span className="new-price">Rs. {product.newPrice}</span>
-                <span className="old-price">Rs. {product.oldPrice}</span>
+                {getDiscountedPrice(product.retailPrice) ? (
+                  <>
+                    <span className="new-price">Rs. {getDiscountedPrice(product.retailPrice)}</span>
+                    <span className="old-price">Rs. {product.retailPrice}</span>
+                  </>
+                ) : (
+                  <span className="new-price">Rs. {product.price}</span>
+                )}
               </div>
             </div>
 

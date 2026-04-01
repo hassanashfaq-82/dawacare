@@ -78,7 +78,7 @@ export const CartProvider = ({ children }) => {
   // Total Price
   const totalPrice = useMemo(() => {
     return cart.reduce(
-      (total, item) => total + (item.newPrice ?? item.productPrice) * item.quantity,
+      (total, item) => total + item.price * item.quantity,
       0
     );
   }, [cart]);
