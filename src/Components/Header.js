@@ -119,7 +119,7 @@ function Header() {
             </div>
 
             {/* Wishlist */}
-            <a href="#" className="icon-link">
+            <Link to="/" className="icon-link">
               <svg
                 width="20"
                 height="20"
@@ -135,7 +135,7 @@ function Header() {
                 />
               </svg>
               <span>Wishlist</span>
-            </a>
+            </Link>
 
             {/* Cart */}
             <button
@@ -234,7 +234,7 @@ function Header() {
 
     {/* Mobile Actions */}
     <div className="mobile-actions">
-      <a href="#" className="mobile-action-link">
+      <Link to="/" className="mobile-action-link" onClick={closeMobileMenu}>
         <svg
           width="20"
           height="20"
@@ -250,7 +250,7 @@ function Header() {
           />
         </svg>
         Wishlist
-      </a>
+      </Link>
 
       <button
   className="mobile-action-link"

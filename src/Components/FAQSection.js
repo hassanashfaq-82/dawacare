@@ -55,7 +55,9 @@ function FAQSection() {
                 </span>
               </summary>
               <div className="faq-content">
-                <p>{faq.answer}</p>
+                <div className="faq-content-inner">
+                  <p>{faq.answer}</p>
+                </div>
               </div>
             </details>
           ))}

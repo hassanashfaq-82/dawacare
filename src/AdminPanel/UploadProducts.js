@@ -17,6 +17,10 @@ function UploadProducts() {
   const [products, setProducts] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize]       = useState(5);
+
+  const PAGE_SIZE_OPTIONS = [5, 15, 25, 50, 100];
 
   const formRef = useRef(null);
 
@@ -134,6 +138,10 @@ function UploadProducts() {
     }
   };
 
+  // ── Pagination ───────────────────────────────────────────────
+  const totalPages = Math.max(1, Math.ceil(products.length / pageSize));
+  const paginated  = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
   return (
     <div className="upload-page">
 
@@ -157,7 +165,7 @@ function UploadProducts() {
 
           <div className="form-group">
             <label htmlFor="productName">Product Name *</label>
-            <input id="productName" type="text" value={productName}
+            <input id="productName" type="text" placeholder="Product name" value={productName}
               onChange={(e) => setProductName(e.target.value)} list="productOptions" />
             <datalist id="productOptions">
               {productOptions.map((n, i) => <option key={i} value={n} />)}
@@ -166,7 +174,7 @@ function UploadProducts() {
 
           <div className="form-group">
             <label htmlFor="brandName">Brand Name</label>
-            <input id="brandName" type="text" value={brandName}
+            <input id="brandName" type="text" placeholder="Brand name" value={brandName}
               onChange={(e) => setBrandName(e.target.value)} list="brandOptions" />
             <datalist id="brandOptions">
               {brandOptions.map((b, i) => <option key={i} value={b} />)}
@@ -175,7 +183,7 @@ function UploadProducts() {
 
           <div className="form-group">
             <label htmlFor="newPrice">New Price *</label>
-            <input id="newPrice" type="number" value={newPrice}
+            <input id="newPrice" type="number" placeholder="New price" value={newPrice}
               onChange={(e) => setNewPrice(e.target.value)} list="newPriceOptions" />
             <datalist id="newPriceOptions">
               {newPriceOptions.map((p, i) => <option key={i} value={p} />)}
@@ -184,7 +192,7 @@ function UploadProducts() {
 
           <div className="form-group">
             <label htmlFor="oldPrice">Old Price</label>
-            <input id="oldPrice" type="number" value={oldPrice}
+            <input id="oldPrice" type="number" placeholder="Old price" value={oldPrice}
               onChange={(e) => setOldPrice(e.target.value)} list="oldPriceOptions" />
             <datalist id="oldPriceOptions">
               {oldPriceOptions.map((p, i) => <option key={i} value={p} />)}
@@ -262,7 +270,7 @@ function UploadProducts() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {paginated.map((product) => (
                   <tr key={product.id} className={editingId === product.id ? "row-being-edited" : ""}>
                     <td>
                       <img src={product.productImage} alt={product.productName}
@@ -291,6 +299,66 @@ function UploadProducts() {
           </div>
         )}
       </div>
+
+      {/* ── Pagination ── */}
+      {products.length > 0 && (
+        <div className="pagination-bar">
+          <div className="pagination-info">
+            Showing {Math.min((currentPage - 1) * pageSize + 1, products.length)}–{Math.min(currentPage * pageSize, products.length)} of {products.length}
+          </div>
+          <div className="pagination-controls">
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+            >«</button>
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >‹</button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((p) => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1)
+              .reduce((acc, p, idx, arr) => {
+                if (idx > 0 && p - arr[idx - 1] > 1) acc.push("...");
+                acc.push(p);
+                return acc;
+              }, [])
+              .map((item, i) =>
+                item === "..." ? (
+                  <span key={`ellipsis-${i}`} className="page-ellipsis">…</span>
+                ) : (
+                  <button
+                    key={item}
+                    className={`page-btn${currentPage === item ? " active" : ""}`}
+                    onClick={() => setCurrentPage(item)}
+                  >{item}</button>
+                )
+              )}
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >›</button>
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage(totalPages)}
+              disabled={currentPage === totalPages}
+            >»</button>
+          </div>
+          <div className="pagination-size">
+            <label>Rows per page:</label>
+            <select
+              value={pageSize}
+              onChange={(e) => { setPageSize(Number(e.target.value)); setCurrentPage(1); }}
+            >
+              {PAGE_SIZE_OPTIONS.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      )}
 
       {/* ── Delete Modal ── */}
       {deleteConfirmId && (

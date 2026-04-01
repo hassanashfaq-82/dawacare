@@ -14,7 +14,6 @@ function Footer() {
         <div className="footer-column brand-info">
           <div className="footer-logo">
             <img src={footerLogoURL} alt="Health Care Logo" />
-            <h2></h2>
           </div>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at
@@ -27,10 +26,10 @@ function Footer() {
         <div className="footer-column">
           <h3>Company</h3>
           <ul>
-            <li><a href="#">What's New</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><Link to="/">What's New</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/">Blog</Link></li>
+            <li><Link to="/">Careers</Link></li>
           </ul>
         </div>
 
@@ -38,10 +37,10 @@ function Footer() {
         <div className="footer-column">
           <h3>Support</h3>
           <ul>
-            <li><a href="#">Help Topics</a></li>
-            <li><a href="#">Getting Started</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><Link to="/">Help Topics</Link></li>
+            <li><Link to="/">Getting Started</Link></li>
+            <li><Link to="/">Features</Link></li>
+            <li><Link to="/">FAQ</Link></li>
           </ul>
         </div>
 
@@ -108,8 +107,8 @@ function Footer() {
       <div className="footer-bottom">
         <p>© Inmine.com. All rights reserved</p>
         <div className="footer-legal">
-          <a href="#">Term & Condition</a>
-          <a href="#">Privacy Policy</a>
+          <Link to="/">Term & Condition</Link>
+          <Link to="/">Privacy Policy</Link>
         </div>
       </div>
     </footer>

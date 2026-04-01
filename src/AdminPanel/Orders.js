@@ -20,6 +20,10 @@ const Orders = () => {
   const [orderStatus, setOrderStatus]   = useState("All Order Status");
   const [paymentStatus, setPaymentStatus] = useState("All Payment Status");
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [currentPage, setCurrentPage]     = useState(1);
+  const [pageSize, setPageSize]           = useState(5);
+
+  const PAGE_SIZE_OPTIONS = [5, 15, 25, 50, 100];
 
   // ── Fetch orders from Firestore ──────────────────────────────
   useEffect(() => {
@@ -83,6 +87,13 @@ const Orders = () => {
     const matchPayment = paymentStatus === "All Payment Status" || o.customerDetails?.paymentMethod === paymentStatus;
     return matchSearch && matchOrder && matchPayment;
   });
+
+  // Reset to page 1 when filters change
+  useEffect(() => { setCurrentPage(1); }, [search, orderStatus, paymentStatus, pageSize]);
+
+  // ── Pagination ───────────────────────────────────────────────
+  const totalPages  = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const paginated   = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   // ── Stats ────────────────────────────────────────────────────
   const totalRevenue = orders.reduce((sum, o) => sum + (o.total ?? 0), 0);
@@ -164,7 +175,7 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((order) => (
+              {paginated.map((order) => (
                 <tr key={order.docId}>
                   <td><span className="order-id">#{order.docId.slice(0, 8)}</span></td>
                   <td>{fullName(order)}</td>
@@ -208,10 +219,72 @@ const Orders = () => {
                   <td colSpan="7" className="no-results">No orders found.</td>
                 </tr>
               )}
+              {paginated.length === 0 && filtered.length > 0 && (
+                <tr>
+                  <td colSpan="7" className="no-results">No orders on this page.</td>
+                </tr>
+              )}
             </tbody>
           </table>
         )}
       </div>
+
+      {/* ── Pagination ── */}
+      {!loading && filtered.length > 0 && (
+        <div className="pagination-bar">
+          <div className="pagination-info">
+            Showing {Math.min((currentPage - 1) * pageSize + 1, filtered.length)}–{Math.min(currentPage * pageSize, filtered.length)} of {filtered.length}
+          </div>
+          <div className="pagination-controls">
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+            >«</button>
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >‹</button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((p) => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1)
+              .reduce((acc, p, idx, arr) => {
+                if (idx > 0 && p - arr[idx - 1] > 1) acc.push("...");
+                acc.push(p);
+                return acc;
+              }, [])
+              .map((item, i) =>
+                item === "..." ? (
+                  <span key={`ellipsis-${i}`} className="page-ellipsis">…</span>
+                ) : (
+                  <button
+                    key={item}
+                    className={`page-btn${currentPage === item ? " active" : ""}`}
+                    onClick={() => setCurrentPage(item)}
+                  >{item}</button>
+                )
+              )}
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >›</button>
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage(totalPages)}
+              disabled={currentPage === totalPages}
+            >»</button>
+          </div>
+          <div className="pagination-size">
+            <label>Rows per page:</label>
+            <select value={pageSize} onChange={(e) => setPageSize(Number(e.target.value))}>
+              {PAGE_SIZE_OPTIONS.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      )}
 
       {/* ── Order Slip Modal ── */}
       {selectedOrder && (

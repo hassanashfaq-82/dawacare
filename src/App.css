@@ -38,11 +38,14 @@ summary {
 .menu {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 .menu a {
   text-decoration: none;
   color: black;
+}
+.menu a:hover {
+  color: #d2222d;
 }
 
 .mob-menu {
@@ -52,6 +55,9 @@ summary {
 .mob-menu a {
   text-decoration: none;
   color: black;
+}
+.mob-menu a:hover {
+  color: #d2222d;
 }
 .btn {
   height: 44px;
@@ -1787,14 +1793,17 @@ O .store-link a {
 
 .faq-item summary {
   padding: 20px 24px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   color: #1a1a1a;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* SVG Arrow Handling */
@@ -1821,20 +1830,30 @@ O .store-link a {
 }
 
 .faq-item[open] .faq-content {
+  grid-template-rows: 1fr;
   padding: 20px 24px;
-  color: #333;
 }
 
 .faq-item[open] .faq-arrow {
   transform: rotate(180deg);
 }
 
-/* Content Area */
+/* Content Area with smooth grid transition */
 .faq-content {
-  padding: 0 24px 20px;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.3s ease,
+    padding 0.3s ease;
+  padding: 0 24px;
   font-size: 15px;
   line-height: 1.7;
   color: #555;
+  overflow: hidden;
+}
+
+.faq-content-inner {
+  min-height: 0;
 }
 
 /* Hover Effect for Closed Items */
@@ -1889,6 +1908,9 @@ O .store-link a {
   font-weight: 700;
   margin-bottom: 25px;
 }
+.footer-column p {
+  margin-bottom: 14px;
+}
 
 .footer-column ul {
   list-style: none;
@@ -1914,9 +1936,7 @@ O .store-link a {
 /* Social Icons */
 .social-icons {
   display: flex;
-  gap: 12px;
-
-  margin-top: 15px;
+  gap: 20px;
 }
 
 .social-icons svg {
@@ -1924,8 +1944,8 @@ O .store-link a {
 }
 
 .social-box {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   background-color: #d32f2f;
   border-radius: 6px;
   /* Small rounded square icons */
