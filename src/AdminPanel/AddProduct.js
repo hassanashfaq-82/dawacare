@@ -217,8 +217,8 @@ function AddProduct() {
             </datalist>
           </div>
 
-          <div className="form-submit-row">
-            <button type="submit" disabled={loading}>
+          <div className="form-submit-row add-product-btn-outer-div">
+            <button type="submit" disabled={loading} className="add-product-btn">
               {loading
                 ? <><i className="fa-solid fa-spinner fa-spin"></i> Adding...</>
                 : <><i className="fa-solid fa-plus"></i> Add Product</>

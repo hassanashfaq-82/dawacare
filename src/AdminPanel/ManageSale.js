@@ -253,8 +253,8 @@ function ManageSale() {
             <strong>How it works:</strong> When sale is active, the discount percentage is automatically applied to all product discount badges and the marquee banner on the homepage. The discount field in Add Product &amp; Edit Product forms is auto-filled and disabled.
           </div>
 
-          <div className="form-submit-row">
-            <button type="submit" disabled={saving}>
+          <div className="form-submit-row save-sale-btn-outer-div">
+            <button type="submit" disabled={saving} className="save-sale-btn">
               {saving
                 ? <><i className="fa-solid fa-spinner fa-spin"></i> Saving...</>
                 : <><i className="fa-solid fa-floppy-disk"></i> Save Sale Settings</>

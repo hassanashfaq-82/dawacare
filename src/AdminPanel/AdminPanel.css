@@ -772,17 +772,31 @@ body {
   white-space: nowrap;
 }
 
-.edit-btn,
+.edit-btn {
+  height: 30px;
+  padding: 0 12px;
+  border: 1.5px solid var(--gray-border);
+  border-radius: 6px;
+  background: green;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
 .delete-btn {
   height: 30px;
   padding: 0 12px;
   border: 1.5px solid var(--gray-border);
   border-radius: 6px;
-  background: var(--white);
+  background: #d2222d;
   font-family: var(--font);
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray-text);
+  color: var(--white);
   cursor: pointer;
   transition:
     border-color 0.15s,
@@ -790,13 +804,79 @@ body {
 }
 
 .edit-btn:hover {
-  border-color: var(--red);
-  color: var(--red);
+  scale: 0.95;
 }
 
 .delete-btn:hover {
-  border-color: #e03e3e;
-  color: #e03e3e;
+  scale: 0.95;
+}
+.model-save-btn-outer-div {
+  display: flex;
+  justify-content: end;
+}
+.model-save-btn {
+  background: #d2222d;
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 23px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.model-save-btn:hover {
+  background: #d2222d;
+  scale: 0.95;
+}
+.add-product-btn-outer-div {
+  display: flex;
+  justify-content: end;
+}
+
+.add-product-btn {
+  margin-top: 23px;
+  background: #d2222d;
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.add-product-btn:hover {
+  background: #d2222d;
+  scale: 0.95;
+}
+
+.save-sale-btn-outer-div {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.save-sale-btn {
+  max-width: fit-content;
+  height: fit-content;
+  background: #d2222d;
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.save-sale-btn:hover {
+  background: #d2222d;
+  scale: 0.95;
 }
 
 /* ─────────────────────────────────────────
@@ -992,11 +1072,11 @@ body {
   padding: 0 14px;
   border: 1.5px solid var(--gray-border);
   border-radius: 6px;
-  background: var(--white);
+  background: #d2222d;
   font-family: var(--font);
   font-size: 13px;
   font-weight: 600;
-  color: var(--gray-text);
+  color: var(--white);
   cursor: pointer;
   transition:
     border-color 0.15s,
@@ -1005,8 +1085,7 @@ body {
 }
 
 .btn-view:hover {
-  border-color: var(--black);
-  color: var(--black);
+  scale: 0.95;
 }
 
 .action-select {

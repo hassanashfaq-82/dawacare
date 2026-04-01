@@ -105,9 +105,9 @@ header {
   position: fixed;
   top: 0px;
   /* same as body top padding */
-  left: 70px;
+  left: 60px;
   /* same as body left padding */
-  right: 70px;
+  right: 60px;
   /* same as body right padding */
   background-color: #f6f7f8;
   padding: 20px;
@@ -296,6 +296,7 @@ header {
   overflow: hidden;
   padding: 20px 0px;
   box-shadow: 0 2px 8px rgba(210, 34, 45, 0.25);
+  border-radius: 12px;
 }
 
 .marquee-track {

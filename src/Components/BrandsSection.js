@@ -3,44 +3,53 @@ import Swiper from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useBrands } from "../contexts/BrandsContext";
 
 function BrandsSection() {
   const swiperRef = useRef(null);
   const swiperInstance = useRef(null);
+  const { brands, loading } = useBrands();
+
+  const sortedBrands = [...brands].sort((a, b) => a.order - b.order);
 
   useEffect(() => {
-    if (swiperRef.current) {
-      swiperInstance.current = new Swiper(swiperRef.current, {
-        modules: [Autoplay, Pagination],
+    if (!swiperRef.current || sortedBrands.length === 0) return;
 
-        slidesPerView: 4,
-        spaceBetween: 30,
-        loop: true,
-
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: false,
-        },
-
-        pagination: {
-          el: ".brands-pagination",
-          clickable: true,
-        },
-
-        breakpoints: {
-          0: { slidesPerView: 2 },
-          576: { slidesPerView: 3 },
-          992: { slidesPerView: 6 },
-        },
-      });
+    // Destroy previous instance before creating a new one
+    if (swiperInstance.current) {
+      swiperInstance.current.destroy(true, true);
+      swiperInstance.current = null;
     }
+
+    swiperInstance.current = new Swiper(swiperRef.current, {
+      modules: [Autoplay, Pagination],
+      slidesPerView: 4,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".brands-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        0: { slidesPerView: 2 },
+        576: { slidesPerView: 3 },
+        992: { slidesPerView: 6 },
+      },
+    });
 
     return () => {
       if (swiperInstance.current) {
         swiperInstance.current.destroy(true, true);
+        swiperInstance.current = null;
       }
     };
-  }, []);
+  }, [sortedBrands.length, loading]);
+
+  if (loading || sortedBrands.length === 0) return null;
 
   return (
     <section className="brands-section">
@@ -49,103 +58,29 @@ function BrandsSection() {
           <h2 className="section-title">
             Featured <span className="text-red big-span">Brand</span>
           </h2>
-
         </div>
 
         {/* SWIPER */}
         <div className="swiper brands-swiper" ref={swiperRef}>
           <div className="swiper-wrapper">
-            {/* Slide 1 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1 (1).png" alt="Pfizer" />
+            {sortedBrands.map((brand) => (
+              <div key={brand.id} className="swiper-slide brand-slide">
+                <div className="brand-item">
+                  <div className="brand-circle">
+                    <img
+                      src={brand.logoUrl}
+                      alt={brand.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(brand.name)}&background=d2222d&color=fff&size=128&bold=true&rounded=true`;
+                      }}
+                    />
+                  </div>
+                  <p className="brand-name">{brand.name}</p>
                 </div>
-                <p className="brand-name">Pfizer</p>
               </div>
-            </div>
-
-            {/* Slide 2 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1 (2).png" alt="Novartis" />
-                </div>
-                <p className="brand-name">Novartis</p>
-              </div>
-            </div>
-
-            {/* Slide 3 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1 (5).png" alt="AbbVie" />
-                </div>
-                <p className="brand-name">AbbVie</p>
-              </div>
-            </div>
-
-            {/* Slide 4 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1.png" alt="Panadol" />
-                </div>
-                <p className="brand-name">Panadol</p>
-              </div>
-            </div>
-
-            {/* Slide 5 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1 (5).png" alt="AbbVie" />
-                </div>
-                <p className="brand-name">AbbVie</p>
-              </div>
-            </div>
-
-            {/* Slide 6 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1.png" alt="Panadol" />
-                </div>
-                <p className="brand-name">Panadol</p>
-              </div>
-            </div>
-            {/* Slide 7 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1.png" alt="Panadol" />
-                </div>
-                <p className="brand-name">Panadol</p>
-              </div>
-            </div>
-
-            {/* Slide 8 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1 (5).png" alt="AbbVie" />
-                </div>
-                <p className="brand-name">AbbVie</p>
-              </div>
-            </div>
-
-            {/* Slide 9 */}
-            <div className="swiper-slide brand-slide">
-              <div className="brand-item">
-                <div className="brand-circle">
-                  <img src="./assets/Images/Ellipse 1.png" alt="Panadol" />
-                </div>
-                <p className="brand-name">Panadol</p>
-              </div>
-            </div>
+            ))}
           </div>
-
-          {/* Pagination */}
         </div>
       </div>
     </section>

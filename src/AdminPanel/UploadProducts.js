@@ -182,130 +182,130 @@ function UploadProducts() {
 
             <form className="upload-form" onSubmit={handleSubmit}>
 
-          <div className="form-group">
-            <label htmlFor="name">Product Name *</label>
-            <input id="name" type="text" placeholder="Product name" value={name}
-              onChange={(e) => setName(e.target.value)} list="nameOptions" />
-            <datalist id="nameOptions">
-              {nameOptions.map((n, i) => <option key={i} value={n} />)}
-            </datalist>
-          </div>
+              <div className="form-group">
+                <label htmlFor="name">Product Name *</label>
+                <input id="name" type="text" placeholder="Product name" value={name}
+                  onChange={(e) => setName(e.target.value)} list="nameOptions" />
+                <datalist id="nameOptions">
+                  {nameOptions.map((n, i) => <option key={i} value={n} />)}
+                </datalist>
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="formula">Formula</label>
-            <input id="formula" type="text" placeholder="e.g. Paracetamol 500mg" value={formula}
-              onChange={(e) => setFormula(e.target.value)} />
-          </div>
+              <div className="form-group">
+                <label htmlFor="formula">Formula</label>
+                <input id="formula" type="text" placeholder="e.g. Paracetamol 500mg" value={formula}
+                  onChange={(e) => setFormula(e.target.value)} />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="type">Type</label>
-            <input id="type" type="text" placeholder="e.g. Tablet, Syrup, Capsule" value={type}
-              onChange={(e) => setType(e.target.value)} list="typeOptions" />
-            <datalist id="typeOptions">
-              {typeOptions.map((t, i) => <option key={i} value={t} />)}
-            </datalist>
-          </div>
+              <div className="form-group">
+                <label htmlFor="type">Type</label>
+                <input id="type" type="text" placeholder="e.g. Tablet, Syrup, Capsule" value={type}
+                  onChange={(e) => setType(e.target.value)} list="typeOptions" />
+                <datalist id="typeOptions">
+                  {typeOptions.map((t, i) => <option key={i} value={t} />)}
+                </datalist>
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="price">Price (Selling Price) *</label>
-            <input id="price" type="number" placeholder="Selling price" value={price}
-              onChange={(e) => setPrice(e.target.value)} min="0" />
-          </div>
+              <div className="form-group">
+                <label htmlFor="price">Price (Selling Price) *</label>
+                <input id="price" type="number" placeholder="Selling price" value={price}
+                  onChange={(e) => setPrice(e.target.value)} min="0" />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="retailPrice">Retail Price (Original Price)</label>
-            <input id="retailPrice" type="number" placeholder="Original/retail price" value={retailPrice}
-              onChange={(e) => setRetailPrice(e.target.value)} min="0" />
-          </div>
+              <div className="form-group">
+                <label htmlFor="retailPrice">Retail Price (Original Price)</label>
+                <input id="retailPrice" type="number" placeholder="Original/retail price" value={retailPrice}
+                  onChange={(e) => setRetailPrice(e.target.value)} min="0" />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="quantityPerPack">Quantity (Tabs/Pack)</label>
-            <input id="quantityPerPack" type="number" placeholder="e.g. 10, 20, 100" value={quantityPerPack}
-              onChange={(e) => setQuantityPerPack(e.target.value)} min="0" />
-          </div>
+              <div className="form-group">
+                <label htmlFor="quantityPerPack">Quantity (Tabs/Pack)</label>
+                <input id="quantityPerPack" type="number" placeholder="e.g. 10, 20, 100" value={quantityPerPack}
+                  onChange={(e) => setQuantityPerPack(e.target.value)} min="0" />
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="manufacturedBy">Manufactured By</label>
-            <input id="manufacturedBy" type="text" placeholder="Manufacturer / brand name" value={manufacturedBy}
-              onChange={(e) => setManufacturedBy(e.target.value)} list="manufacturedByOptions" />
-            <datalist id="manufacturedByOptions">
-              {manufacturedByOptions.map((b, i) => <option key={i} value={b} />)}
-            </datalist>
-          </div>
+              <div className="form-group">
+                <label htmlFor="manufacturedBy">Manufactured By</label>
+                <input id="manufacturedBy" type="text" placeholder="Manufacturer / brand name" value={manufacturedBy}
+                  onChange={(e) => setManufacturedBy(e.target.value)} list="manufacturedByOptions" />
+                <datalist id="manufacturedByOptions">
+                  {manufacturedByOptions.map((b, i) => <option key={i} value={b} />)}
+                </datalist>
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="picture">Product Image URL *</label>
-            <input id="picture" type="text" value={picture}
-              onChange={(e) => setPicture(e.target.value)}
-              placeholder="Paste image link here" list="pictureOptions" />
-            <datalist id="pictureOptions">
-              {pictureOptions.map((u, i) => <option key={i} value={u} />)}
-            </datalist>
-            {picture && (
-              <img
-                src={picture}
-                alt="Preview"
-                className="product-thumb"
-                style={{ marginTop: "8px", width: "80px", height: "80px", objectFit: "cover", borderRadius: "6px" }}
-                onError={(e) => { e.target.style.display = "none"; }}
-              />
-            )}
-          </div>
+              <div className="form-group">
+                <label htmlFor="picture">Product Image URL *</label>
+                <input id="picture" type="text" value={picture}
+                  onChange={(e) => setPicture(e.target.value)}
+                  placeholder="Paste image link here" list="pictureOptions" />
+                <datalist id="pictureOptions">
+                  {pictureOptions.map((u, i) => <option key={i} value={u} />)}
+                </datalist>
+                {picture && (
+                  <img
+                    src={picture}
+                    alt="Preview"
+                    className="product-thumb"
+                    style={{ marginTop: "8px", width: "80px", height: "80px", objectFit: "cover", borderRadius: "6px" }}
+                    onError={(e) => { e.target.style.display = "none"; }}
+                  />
+                )}
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="discounts">
-              Discounts / Sale Badge
-              {sale.isActive && (
-                <span style={{ marginLeft: "8px", fontSize: "11px", background: "#d2222d", color: "#fff", borderRadius: "4px", padding: "2px 7px", fontWeight: "600" }}>
-                  Auto from Sale
-                </span>
-              )}
-            </label>
-            <input
-              id="discounts"
-              type="text"
-              value={discounts}
-              readOnly
-              disabled
-              placeholder={sale.isActive ? discountLabel || "No sale active" : "No active sale — go to Manage Sale"}
-              style={{ background: "#f5f5f5", color: "#888", cursor: "not-allowed" }}
-            />
-            {sale.isActive
-              ? <small style={{ color: "#d2222d", marginTop: "4px", display: "block" }}>Discount is set globally via <strong>Manage Sale</strong>.</small>
-              : <small style={{ color: "#aaa", marginTop: "4px", display: "block" }}>Enable a sale from <strong>Manage Sale</strong> to auto-fill this.</small>
-            }
-          </div>
+              <div className="form-group">
+                <label htmlFor="discounts">
+                  Discounts / Sale Badge
+                  {sale.isActive && (
+                    <span style={{ marginLeft: "8px", fontSize: "11px", background: "#d2222d", color: "#fff", borderRadius: "4px", padding: "2px 7px", fontWeight: "600" }}>
+                      Auto from Sale
+                    </span>
+                  )}
+                </label>
+                <input
+                  id="discounts"
+                  type="text"
+                  value={discounts}
+                  readOnly
+                  disabled
+                  placeholder={sale.isActive ? discountLabel || "No sale active" : "No active sale — go to Manage Sale"}
+                  style={{ background: "#f5f5f5", color: "#888", cursor: "not-allowed" }}
+                />
+                {sale.isActive
+                  ? <small style={{ color: "#d2222d", marginTop: "4px", display: "block" }}>Discount is set globally via <strong>Manage Sale</strong>.</small>
+                  : <small style={{ color: "#aaa", marginTop: "4px", display: "block" }}>Enable a sale from <strong>Manage Sale</strong> to auto-fill this.</small>
+                }
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input id="description" type="text" value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Brief description about the medicine" list="descriptionOptions" />
-            <datalist id="descriptionOptions">
-              {descriptionOptions.map((d, i) => <option key={i} value={d} />)}
-            </datalist>
-          </div>
+              <div className="form-group">
+                <label htmlFor="description">Description</label>
+                <input id="description" type="text" value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Brief description about the medicine" list="descriptionOptions" />
+                <datalist id="descriptionOptions">
+                  {descriptionOptions.map((d, i) => <option key={i} value={d} />)}
+                </datalist>
+              </div>
 
-          <div className="form-group">
-            <label htmlFor="usage">Usage Instructions</label>
-            <input id="usage" type="text" value={usage}
-              onChange={(e) => setUsage(e.target.value)}
-              placeholder="How to use this medicine" list="usageOptions" />
-            <datalist id="usageOptions">
-              {usageOptions.map((u, i) => <option key={i} value={u} />)}
-            </datalist>
-          </div>
+              <div className="form-group">
+                <label htmlFor="usage">Usage Instructions</label>
+                <input id="usage" type="text" value={usage}
+                  onChange={(e) => setUsage(e.target.value)}
+                  placeholder="How to use this medicine" list="usageOptions" />
+                <datalist id="usageOptions">
+                  {usageOptions.map((u, i) => <option key={i} value={u} />)}
+                </datalist>
+              </div>
 
-          <div className="form-submit-row">
-            <button type="submit">
-              {editingId
-                ? <><i className="fa-solid fa-floppy-disk"></i> Save Changes</>
-                : <><i className="fa-solid fa-cloud-arrow-up"></i> Upload Product</>
-              }
-            </button>
-          </div>
+              <div className="form-submit-row model-save-btn-outer-div">
+                <button type="submit" className="model-save-btn">
+                  {editingId
+                    ? <><i className="fa-solid fa-floppy-disk"></i> Save Changes</>
+                    : <><i className="fa-solid fa-cloud-arrow-up"></i> Upload Product</>
+                  }
+                </button>
+              </div>
 
-        </form>
+            </form>
           </div>
         </div>
       )}

@@ -97,6 +97,12 @@ const Sidebar = () => {
               </Link>
             </li>
 
+            <li className={location.pathname === "/admin/ManageBrands" ? "active" : ""}>
+              <Link to="/admin/ManageBrands">
+                <span className="menu-text">Manage Brands</span>
+              </Link>
+            </li>
+
             <li className={location.pathname === "/admin/BusinessInfo" ? "active" : ""}>
               <Link to="/admin/BusinessInfo">
                 <span className="menu-text">Business Info</span>
