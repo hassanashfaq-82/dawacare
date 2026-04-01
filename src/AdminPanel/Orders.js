@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import "./AdminPanel.css";
 
@@ -20,6 +20,7 @@ const Orders = () => {
   const [orderStatus, setOrderStatus]   = useState("All Order Status");
   const [paymentStatus, setPaymentStatus] = useState("All Payment Status");
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
   const [currentPage, setCurrentPage]     = useState(1);
   const [pageSize, setPageSize]           = useState(5);
 
@@ -61,6 +62,18 @@ const Orders = () => {
     }
   };
 
+  // ── Delete order ─────────────────────────────────────────────
+  const handleDeleteOrder = async (docId) => {
+    try {
+      await deleteDoc(doc(db, "orders", docId));
+      setOrders((prev) => prev.filter((o) => o.docId !== docId));
+      if (selectedOrder?.docId === docId) setSelectedOrder(null);
+      setDeleteConfirmId(null);
+    } catch (err) {
+      console.error("Error deleting order:", err);
+    }
+  };
+
   // ── Helpers ──────────────────────────────────────────────────
   const formatDate = (ts) => {
     if (!ts?.seconds) return "—";
@@ -76,7 +89,7 @@ const Orders = () => {
       .join(", ");
 
   const itemTotal = (items = []) =>
-    items.reduce((sum, i) => sum + (i.newPrice ?? 0) * (i.quantity ?? 1), 0);
+    items.reduce((sum, i) => sum + (i.price ?? 0) * (i.quantity ?? 1), 0);
 
   // ── Filter ───────────────────────────────────────────────────
   const filtered = orders.filter((o) => {
@@ -210,6 +223,12 @@ const Orders = () => {
                         <option>Delivered</option>
                         <option>Cancelled</option>
                       </select>
+                      <button
+                        className="btn-delete"
+                        onClick={() => setDeleteConfirmId(order.docId)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -282,6 +301,27 @@ const Orders = () => {
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
+          </div>
+        </div>
+      )}
+
+      {/* ── Delete Confirmation Modal ── */}
+      {deleteConfirmId && (
+        <div className="confirm-overlay">
+          <div className="confirm-box">
+            <div className="confirm-icon">
+              <i className="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3>Delete Order?</h3>
+            <p>This action cannot be undone.</p>
+            <div className="confirm-actions">
+              <button className="confirm-delete-btn" onClick={() => handleDeleteOrder(deleteConfirmId)}>
+                <i className="fa-solid fa-trash"></i> Yes, Delete
+              </button>
+              <button className="cancel-btn" onClick={() => setDeleteConfirmId(null)}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -364,23 +404,23 @@ const Orders = () => {
                 <div className="slip-item-info">
                   <img
                     className="slip-item-img"
-                    src={item.productImage}
-                    alt={item.productName}
+                    src={item.picture}
+                    alt={item.name}
                     onError={(e) => { e.target.style.display = "none"; }}
                   />
                   <div className="slip-item-meta">
-                    <span className="slip-item-name">{item.productName}</span>
-                    <span className="slip-item-brand">{item.brandName}</span>
+                    <span className="slip-item-name">{item.name}</span>
+                    <span className="slip-item-brand">{item.manufacturedBy}</span>
                   </div>
                 </div>
                 <span>{item.quantity}</span>
                 <div className="slip-item-prices">
-                  <span className="slip-item-new">Rs. {(item.newPrice ?? 0).toLocaleString()}</span>
-                  {item.oldPrice && item.oldPrice !== item.newPrice && (
-                    <span className="slip-item-old">Rs. {item.oldPrice.toLocaleString()}</span>
+                  <span className="slip-item-new">Rs. {(item.price ?? 0).toLocaleString()}</span>
+                  {item.retailPrice && item.retailPrice !== item.price && (
+                    <span className="slip-item-old">Rs. {item.retailPrice.toLocaleString()}</span>
                   )}
-                  {item.discount && (
-                    <span className="slip-item-discount">{item.discount} off</span>
+                  {item.discounts && (
+                    <span className="slip-item-discount">{item.discounts} off</span>
                   )}
                 </div>
               </div>

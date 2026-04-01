@@ -40,7 +40,7 @@ const CheckoutPage = () => {
 
   // Calculate totals
   const itemsTotal = cartItems.length > 0
-    ? cartItems.reduce((sum, item) => sum + (item.productPrice || 0) * (item.quantity || 0), 0)
+    ? cartItems.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0)
     : 0;
 
   const grandTotal = itemsTotal + shippingRate;
@@ -151,11 +151,11 @@ const CheckoutPage = () => {
               {cartItems.length === 0 && <p>Your cart is empty</p>}
               {cartItems.map(item => (
                 <div key={item.id} className="order-item">
-                  <img src={item.productImage} alt={item.productName} />
+                  <img src={item.picture} alt={item.name} />
                   <div>
-                    <p>{item.productName}</p>
+                    <p>{item.name}</p>
                     <p>Qty: {item.quantity}</p>
-                    <p>Rs. {item.newPrice}</p>
+                    <p>Rs. {item.price}</p>
                   </div>
                 </div>
               ))}
