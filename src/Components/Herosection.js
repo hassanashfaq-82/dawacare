@@ -40,7 +40,7 @@ function HeroSection() {
                     <span className="big-span">{index === 1 ? <><br />{slide.heroTitleHighlight}</> : slide.heroTitleHighlight}</span>
                   </h1>
                   <h2 className="hero-subtitle">{slide.heroSubtitle}</h2>
-                  <a href="#products" className="cta-button">{slide.heroCTAButtonText}</a>
+                  <a href="#products" className="cta-button">Upto {slide.heroCTAButtonText}</a>
                 </div>
 
                 <div className="hero-image-wrapper">
@@ -60,12 +60,12 @@ function HeroSection() {
 
         <div className="swiper-button-next hero-next">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M4 12h12.25L11 6.75l.66-.75l6.5 6.5l-6.5 6.5l-.66-.75L16.25 13H4z"/>
+            <path fill="currentColor" d="M4 12h12.25L11 6.75l.66-.75l6.5 6.5l-6.5 6.5l-.66-.75L16.25 13H4z" />
           </svg>
         </div>
         <div className="swiper-button-prev hero-prev">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M19 13H6.75L12 18.25l-.66.75l-6.5-6.5l6.5-6.5l.66.75L6.75 12H19z"/>
+            <path fill="currentColor" d="M19 13H6.75L12 18.25l-.66.75l-6.5-6.5l6.5-6.5l.66.75L6.75 12H19z" />
           </svg>
         </div>
         {/* <div className="swiper-pagination"></div> */}

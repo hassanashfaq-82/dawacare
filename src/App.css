@@ -308,7 +308,7 @@ header {
 .marquee-content {
   display: flex;
   flex-shrink: 0;
-  animation: marquee-scroll 28s linear infinite;
+  animation: marquee-scroll 80s linear infinite;
   white-space: nowrap;
 }
 
@@ -1327,8 +1327,7 @@ header {
   font-size: 13px;
 }
 
-/* Brands section */
-/* Brands section */
+/* Brands segment */
 .brands-section {
   width: 100%;
   padding: 60px 0;
@@ -1338,32 +1337,6 @@ header {
 .brands-swiper {
   width: 100%;
   padding: 20px 0;
-}
-
-/* Brand slide */
-.brand-slide {
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-slide img {
-  width: 120px;
-  height: auto;
-  object-fit: contain;
-  opacity: 0.8;
-  transition: 0.3s ease;
-}
-
-.brand-slide img:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.brands-section {
-  padding: 60px 0;
-  background-color: #fff;
 }
 
 .brands-container {
@@ -1418,9 +1391,8 @@ header {
 
 .brand-circle {
   width: 150px;
-  /* Adjust based on your preference */
   height: 150px;
-  /* Light grey circle background */
+  background-color: #f6f7f8; /* Suble light grey background */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1428,7 +1400,7 @@ header {
   margin-bottom: 15px;
   transition: transform 0.3s ease;
   overflow: hidden;
-  padding: 10px;
+  padding: 20px; /* Increased padding to give logos room */
 }
 
 .brand-circle:hover {
@@ -1437,9 +1409,15 @@ header {
 
 .brand-circle img {
   max-width: 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* Changed from cover to prevent cropping */
+  transition: transform 0.3s ease;
+}
+
+.brand-item:hover .brand-circle img {
+  transform: scale(1.1);
 }
 
 .brand-name {
