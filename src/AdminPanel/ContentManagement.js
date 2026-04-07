@@ -16,7 +16,7 @@ function ContentManagement() {
   const [contact, setContact] = useState(DEFAULT_SITE_INFO.contact);
   const [saving, setSaving] = useState(false);
 
-  // Sync local state when Firestore data loads
+  // Sync local state only once when Firestore data first loads
   useEffect(() => {
     if (!loading) {
       setLogoURL(siteInfo.logoURL);
@@ -24,7 +24,8 @@ function ContentManagement() {
       setSlides(siteInfo.slides);
       setContact(siteInfo.contact);
     }
-  }, [loading, siteInfo]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   const updateSlide = (index, field, value) => {
     setSlides((prev) => {
@@ -38,7 +39,10 @@ function ContentManagement() {
     e.preventDefault();
     setSaving(true);
     try {
-      await saveSiteInfo({ logoURL, footerLogoURL, slides, contact });
+      const slidesToSave = sale.isActive && discountLabel
+        ? slides.map((s) => ({ ...s, heroCTAButtonText: discountLabel }))
+        : slides;
+      await saveSiteInfo({ logoURL, footerLogoURL, slides: slidesToSave, contact });
       toast.success("Business info saved successfully");
     } catch (err) {
       console.error(err);
