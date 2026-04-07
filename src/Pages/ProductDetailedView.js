@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useCart } from "../contexts/CartContext";
+import { useSale } from "../contexts/SaleContext";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import FeatureProducts from "../Components/FeatureProducts";
@@ -10,9 +11,17 @@ import FeatureProducts from "../Components/FeatureProducts";
 const ProductDetailedView = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { sale } = useSale();
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  const getDiscountedPrice = (retailPrice) => {
+    if (sale.isActive && sale.discountPercent > 0 && retailPrice) {
+      return Math.round(retailPrice * (1 - sale.discountPercent / 100));
+    }
+    return null;
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,7 +53,20 @@ const ProductDetailedView = () => {
           <h1>{product.name}</h1>
           <h3 className="brand">Manufactured By: {product.manufacturedBy}</h3>
 
-          <p className="price">Rs. {product.price}</p>
+          {(() => {
+            const discountedPrice = getDiscountedPrice(product.retailPrice);
+            return discountedPrice ? (
+              <div className="price">
+                <span className="new-price">Rs. {discountedPrice}</span>
+                <span className="old-price">Rs. {product.retailPrice}</span>
+                {sale.discountPercent > 0 && (
+                  <span className="discount-badge">{sale.discountPercent}%</span>
+                )}
+              </div>
+            ) : (
+              <p className="price">Rs. {product.retailPrice || product.price}</p>
+            );
+          })()}
 
           {/* Medicine Specific Info */}
           <div className="medicine-info">
@@ -80,7 +102,10 @@ const ProductDetailedView = () => {
           {/* Add To Cart */}
           <button
             className="add-to-cart-btn"
-            onClick={() => addToCart({ ...product, quantity })}
+            onClick={() => {
+              const discountedPrice = getDiscountedPrice(product.retailPrice);
+              addToCart({ ...product, price: discountedPrice ?? product.price, quantity });
+            }}
           >
             Add to Cart
           </button>

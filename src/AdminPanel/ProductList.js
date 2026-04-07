@@ -1,7 +1,7 @@
 // src/AdminPanel/ProductList.js
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase/firebase";
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, writeBatch, deleteField } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, writeBatch, deleteField, onSnapshot } from "firebase/firestore";
 import toast from "../utils/toast";
 import { useSale } from "../contexts/SaleContext";
 
@@ -48,21 +48,17 @@ function ProductList() {
     "Apply topically twice a day", "Take with water"
   ];
 
-  const fetchProducts = async () => {
-    try {
-      const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
+  useEffect(() => {
+    removeStockField();
+    const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
       setProducts(list);
-    } catch (err) {
+    }, (err) => {
       console.error(err);
       toast.error("Failed to load products");
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-    removeStockField();
+    });
+    return () => unsubscribe();
   }, []);
 
   const removeStockField = async () => {
@@ -124,7 +120,6 @@ function ProductList() {
         toast.success("Product uploaded successfully");
       }
       resetForm();
-      fetchProducts();
     } catch (error) {
       console.error(error);
       toast.error("Failed to save product");
@@ -327,7 +322,7 @@ function ProductList() {
                   <th>Product Name</th>
                   <th>Formula</th>
                   <th>Type</th>
-                  <th>Price</th>
+                  <th>Selling Price</th>
                   <th>Retail Price</th>
                   <th>Qty/Pack</th>
                   <th>Manufactured By</th>
@@ -348,8 +343,25 @@ function ProductList() {
                     <td data-label="Product Name" className="product-name-cell">{product.name}</td>
                     <td data-label="Formula" className="truncate-cell">{product.formula || "—"}</td>
                     <td data-label="Type">{product.type || "—"}</td>
-                    <td data-label="Price" className="price-new">₨{product.price}</td>
-                    <td data-label="Retail Price" className="price-old">₨{product.retailPrice || "—"}</td>
+                    <td data-label="Selling Price">
+                      {(() => {
+                        const base = product.retailPrice || product.price;
+                        const discounted = sale.isActive && sale.discountPercent > 0 && base
+                          ? Math.round(base * (1 - sale.discountPercent / 100))
+                          : null;
+                        return discounted ? (
+                          <span>
+                            <span className="price-new">₨{discounted}</span>{" "}
+                            <span className="price-old" style={{ fontSize: "11px" }}>₨{base}</span>
+                          </span>
+                        ) : (
+                          <span className="price-new">₨{product.price || "—"}</span>
+                        );
+                      })()}
+                    </td>
+                    <td data-label="Retail Price" className="price-old">
+                      {product.retailPrice ? `₨${product.retailPrice}` : "—"}
+                    </td>
                     <td data-label="Qty/Pack">{product.quantityPerPack || "—"}</td>
                     <td data-label="Manufactured By">{product.manufacturedBy || "—"}</td>
                     <td data-label="Discounts">{product.discounts || "—"}</td>
