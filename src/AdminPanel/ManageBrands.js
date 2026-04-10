@@ -113,7 +113,7 @@ function ManageBrands() {
           Add or remove featured brands shown in the carousel on the home page. Changes are reflected immediately after saving.
         </p>
 
-        <div style={{ maxWidth: "80%", width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", borderBottom: "2px solid #d2222d", paddingBottom: "6px" }}>
+        <div className="mb-section-header">
           <h3 style={{ margin: 0, color: "#d2222d" }}>
             <i className="fa-solid fa-tags" style={{ marginRight: "8px" }}></i>
             Featured Brands
@@ -145,17 +145,7 @@ function ManageBrands() {
         )}
 
         {localBrands.map((brand, index) => (
-          <div
-            key={brand.id}
-            style={{
-              border: "1px solid #e0e0e0",
-              borderRadius: "10px",
-              padding: "20px",
-              marginBottom: "16px",
-              background: "#fafafa",
-              maxWidth: "80%", width: "100%",
-            }}
-          >
+          <div key={brand.id} className="mb-brand-card">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
               <h4 style={{ margin: 0, color: "#333" }}>
                 <i className="fa-solid fa-certificate" style={{ marginRight: "6px", color: "#d2222d" }}></i>
@@ -212,7 +202,7 @@ function ManageBrands() {
               </div>
             </div>
 
-            <div style={{ maxWidth: "50%", width: "100%", display: "flex", flexDirection: "column", gap: "16px", alignItems: "start" }}>
+            <div className="mb-brand-fields">
               <div className="form-group" style={{ margin: 0, width: "100%" }}>
                 <label>Brand Name</label>
                 <input

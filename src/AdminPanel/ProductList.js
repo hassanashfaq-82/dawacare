@@ -4,6 +4,7 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, writeBatch, deleteField, onSnapshot } from "firebase/firestore";
 import toast from "../utils/toast";
 import { useSale } from "../contexts/SaleContext";
+import CloudinaryUpload from "../components/CloudinaryUpload";
 
 function ProductList() {
   const { sale, discountLabel } = useSale();
@@ -35,13 +36,7 @@ function ProductList() {
   ];
   const manufacturedByOptions = ["Pfizer", "GSK", "Abbott", "Sanofi", "Novartis"];
   const typeOptions = ["Tablet", "Capsule", "Syrup", "Injection", "Cream", "Drops", "Sachet", "Inhaler"];
-  const pictureOptions = [
-    "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500",
-    "https://images.unsplash.com/photo-1585435557343-3b092031a831?w=500",
-    "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=500",
-    "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=500"
-  ];
-  const descriptionOptions = [
+const descriptionOptions = [
     "Pain relief tablets", "Vitamin supplement",
     "Joint support capsules", "Anti-inflammatory medication"
   ];
@@ -234,22 +229,14 @@ function ProductList() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="picture">Product Image URL *</label>
-                <input id="picture" type="text" value={picture}
-                  onChange={(e) => setPicture(e.target.value)}
-                  placeholder="Paste image link here" list="pictureOptions" />
-                <datalist id="pictureOptions">
-                  {pictureOptions.map((u, i) => <option key={i} value={u} />)}
-                </datalist>
-                {picture && (
-                  <img
-                    src={picture}
-                    alt="Preview"
-                    className="product-thumb"
-                    style={{ marginTop: "8px", width: "80px", height: "80px", objectFit: "cover", borderRadius: "6px" }}
-                    onError={(e) => { e.target.style.display = "none"; }}
-                  />
-                )}
+                <CloudinaryUpload
+                  id="pl-edit-picture"
+                  label="Product Image *"
+                  required
+                  value={picture}
+                  onChange={(url) => setPicture(url)}
+                  previewShape="square"
+                />
               </div>
 
               <div className="form-group">

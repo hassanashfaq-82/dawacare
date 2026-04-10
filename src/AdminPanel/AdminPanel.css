@@ -2602,3 +2602,45 @@ body {
   border-radius: 99px;
   transition: width 0.2s ease;
 }
+
+/* ── Manage Brands ─────────────────────────────────────────── */
+.mb-section-header {
+  width: 100%;
+  max-width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #d2222d;
+  padding-bottom: 6px;
+}
+
+.mb-brand-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background: #fafafa;
+  width: 100%;
+  max-width: 80%;
+}
+
+.mb-brand-fields {
+  width: 100%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .mb-section-header,
+  .mb-brand-card {
+    max-width: 100%;
+  }
+
+  .mb-brand-fields {
+    max-width: 100%;
+  }
+}
