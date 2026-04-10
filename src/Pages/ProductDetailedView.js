@@ -4,9 +4,9 @@ import { db } from "../firebase/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useCart } from "../contexts/CartContext";
 import { useSale } from "../contexts/SaleContext";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import FeatureProducts from "../Components/FeatureProducts";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import FeatureProducts from "../components/FeatureProducts";
 
 const ProductDetailedView = () => {
   const { id } = useParams();

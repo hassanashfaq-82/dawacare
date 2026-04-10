@@ -12,11 +12,11 @@ import Products from "./Pages/Products";
 import ProductDetailedView from "./Pages/ProductDetailedView";
 import CheckoutPage from "./Pages/CheckoutPage";
 import Login from "./Pages/Login";
-import ProtectedRoute from "./Components/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 // Admin panel
 import Dashboard from "./AdminPanel/Dashoard";
 // Cart
-import Cart from "./Components/Cart";
+import Cart from "./components/Cart";
 
 function App() {
   return (

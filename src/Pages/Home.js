@@ -1,17 +1,17 @@
 import React from 'react'
-import Header from '../Components/Header';
-import SaleMarquee from '../Components/SaleMarquee';
-import HeroSection from '../Components/Herosection';
-import FeaturesBar from '../Components/Featuresbar';
-import ProductSlider from '../Components/Productslider';
-import BrandsSection from '../Components/BrandsSection';
-import FeatureProducts from '../Components/FeatureProducts';
-import CTABanner from '../Components/CTABanner';
-import Gallery from '../Components/Gallery';
-import Testimonials from '../Components/Testimonials';
-// import NewsSection from '../Components/NewsSection';
-import FAQSection from '../Components/FAQSection';
-import Footer from '../Components/Footer';
+import Header from '../components/Header';
+import SaleMarquee from '../components/SaleMarquee';
+import HeroSection from '../components/Herosection';
+import FeaturesBar from '../components/Featuresbar';
+import ProductSlider from '../components/Productslider';
+import BrandsSection from '../components/BrandsSection';
+import FeatureProducts from '../components/FeatureProducts';
+import CTABanner from '../components/CTABanner';
+import Gallery from '../components/Gallery';
+import Testimonials from '../components/Testimonials';
+// import NewsSection from '../components/NewsSection';
+import FAQSection from '../components/FAQSection';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (

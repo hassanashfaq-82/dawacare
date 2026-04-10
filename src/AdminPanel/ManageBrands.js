@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useBrands } from "../contexts/BrandsContext";
 import toast from "../utils/toast";
+import CloudinaryUpload from "../components/CloudinaryUpload";
 
 const EMPTY_MODAL = { name: "", logoUrl: "" };
 
@@ -191,8 +192,8 @@ function ManageBrands() {
               </div>
             </div>
 
-            <div className="upload-form" style={{ display: "grid", gap: "12px" }}>
-              <div className="form-group">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", alignItems: "start" }}>
+              <div className="form-group" style={{ margin: 0 }}>
                 <label>Brand Name</label>
                 <input
                   type="text"
@@ -202,31 +203,14 @@ function ManageBrands() {
                 />
               </div>
 
-              <div className="form-group">
-                <label>Brand Logo URL</label>
-                <input
-                  type="text"
-                  value={brand.logoUrl}
-                  onChange={(e) => handleChange(index, "logoUrl", e.target.value)}
-                  placeholder="Paste logo image link here"
-                />
-              </div>
-
-              {brand.logoUrl && (
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{ fontSize: "13px", color: "#888" }}>Preview:</span>
-                  <div style={{ background: "#ffffff", border: "1px solid #e0e0e0", borderRadius: "50%", width: "70px", height: "70px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-                    <img
-                      src={brand.logoUrl}
-                      alt={brand.name || "Brand logo"}
-                      style={{ width: "55px", height: "55px", objectFit: "contain" }}
-                      onError={(e) => {
-                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(brand.name || "B")}&background=d2222d&color=fff&size=55&bold=true&rounded=true`;
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
+              <CloudinaryUpload
+                id={`mb-logo-${brand.id}`}
+                label="Brand Logo"
+                required
+                value={brand.logoUrl}
+                onChange={(url) => handleChange(index, "logoUrl", url)}
+                previewShape="circle"
+              />
             </div>
           </div>
         ))}
@@ -301,8 +285,8 @@ function ManageBrands() {
               </button>
             </div>
 
-            <div className="upload-form" style={{ display: "grid", gap: "16px" }}>
-              <div className="form-group">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", alignItems: "start" }}>
+              <div className="form-group" style={{ margin: 0 }}>
                 <label>Brand Name <span style={{ color: "#d2222d" }}>*</span></label>
                 <input
                   type="text"
@@ -313,31 +297,14 @@ function ManageBrands() {
                 />
               </div>
 
-              <div className="form-group">
-                <label>Brand Logo URL <span style={{ color: "#d2222d" }}>*</span></label>
-                <input
-                  type="text"
-                  value={modalData.logoUrl}
-                  onChange={(e) => setModalData((d) => ({ ...d, logoUrl: e.target.value }))}
-                  placeholder="Paste logo image link here"
-                />
-              </div>
-
-              {modalData.logoUrl && (
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{ fontSize: "13px", color: "#888" }}>Preview:</span>
-                  <div style={{ background: "#ffffff", border: "1px solid #e0e0e0", borderRadius: "50%", width: "70px", height: "70px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-                    <img
-                      src={modalData.logoUrl}
-                      alt={modalData.name || "Brand logo"}
-                      style={{ width: "55px", height: "55px", objectFit: "contain" }}
-                      onError={(e) => {
-                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(modalData.name || "B")}&background=d2222d&color=fff&size=55&bold=true&rounded=true`;
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
+              <CloudinaryUpload
+                id="mb-modal-logo"
+                label="Brand Logo"
+                required
+                value={modalData.logoUrl}
+                onChange={(url) => setModalData((d) => ({ ...d, logoUrl: url }))}
+                previewShape="circle"
+              />
             </div>
 
             <div style={{ display: "flex", gap: "12px", marginTop: "28px", justifyContent: "flex-end" }}>

@@ -834,7 +834,7 @@ body {
 }
 .add-product-btn-outer-div {
   display: flex;
-  justify-content: end;
+  justify-content: start;
 }
 
 .add-product-btn {
@@ -2145,7 +2145,9 @@ body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
   white-space: nowrap;
 }
 
@@ -2264,7 +2266,9 @@ body {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
 }
 
 .bulk-submit-btn:hover:not(:disabled) {
@@ -2411,4 +2415,190 @@ body {
   .bulk-product-card {
     padding: 16px;
   }
+}
+
+/* ════════════════════════════════════════════════════
+   CLOUDINARY UPLOAD COMPONENT
+════════════════════════════════════════════════════ */
+.cu-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cu-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.cu-required {
+  color: var(--red);
+  margin-left: 3px;
+}
+
+/* Drop zone */
+.cu-dropzone {
+  border: 2px dashed var(--gray-border);
+  border-radius: var(--radius-md);
+  background: #9e9e9e;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  outline: none;
+}
+
+.cu-dropzone:hover,
+.cu-dropzone:focus {
+  border-color: var(--black);
+  background: #8e8e8e;
+}
+
+.cu-dropzone-active {
+  border-color: var(--red);
+  background: #878787;
+}
+
+.cu-dropzone-uploading {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Empty state */
+.cu-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.cu-upload-icon {
+  font-size: 28px;
+  color: #fff;
+}
+
+.cu-upload-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.cu-upload-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* Has-image state */
+.cu-has-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.cu-preview-img {
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.cu-preview-square {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: #9e9e9e;
+}
+
+.cu-preview-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  object-fit: contain;
+  background: #9e9e9e;
+}
+
+.cu-preview-wide {
+  height: 52px;
+  max-width: 180px;
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.3);
+  object-fit: contain;
+  background: #9e9e9e;
+}
+
+.cu-image-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cu-change-hint {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+}
+
+.cu-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  font-size: 11px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cu-remove-btn:hover {
+  background: rgba(210,34,45,0.7);
+  border-color: transparent;
+}
+
+/* Uploading state */
+.cu-uploading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.cu-spin-icon {
+  font-size: 22px;
+  color: var(--black);
+}
+
+.cu-uploading-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.cu-progress-bar {
+  width: 100%;
+  max-width: 240px;
+  height: 5px;
+  background: var(--gray-border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.cu-progress-fill {
+  height: 100%;
+  background: var(--black);
+  border-radius: 99px;
+  transition: width 0.2s ease;
 }

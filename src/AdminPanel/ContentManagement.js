@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSiteInfo, DEFAULT_SITE_INFO } from "../contexts/SiteInfoContext";
 import { useSale } from "../contexts/SaleContext";
 import toast from "../utils/toast";
+import CloudinaryUpload from "../components/CloudinaryUpload";
 
 const SLIDE_LABELS = ["Hero Section Slide 1", "Hero Section Slide 2", "Hero Section Slide 3"];
 
@@ -97,28 +98,15 @@ function ContentManagement() {
           }}
         >
           <div className="upload-form" style={{ display: "grid", gap: "12px" }}>
-            <div className="form-group">
-              <label>Logo Image URL</label>
-              <input
-                type="text"
-                value={logoURL || ""}
-                onChange={(e) => setLogoURL(e.target.value)}
-                placeholder="Paste logo image link here"
-              />
-            </div>
-            {logoURL && (
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <span style={{ fontSize: "13px", color: "#888" }}>Preview (on header):</span>
-                <div style={{ background: "#ffffff", border: "1px solid #e0e0e0", borderRadius: "8px", padding: "8px 16px", display: "flex", alignItems: "center" }}>
-                  <img
-                    src={logoURL}
-                    alt="Logo preview"
-                    style={{ height: "40px", maxWidth: "150px", objectFit: "contain" }}
-                    onError={(e) => { e.target.style.display = "none"; }}
-                  />
-                </div>
-              </div>
-            )}
+            <CloudinaryUpload
+              id="cm-logo"
+              label="Logo Image"
+              required
+              value={logoURL || ""}
+              onChange={setLogoURL}
+              previewShape="wide"
+              previewStyle={{ height: "40px", maxWidth: "150px", objectFit: "contain" }}
+            />
           </div>
         </div>
 
@@ -138,28 +126,15 @@ function ContentManagement() {
           }}
         >
           <div className="upload-form" style={{ display: "grid", gap: "12px" }}>
-            <div className="form-group">
-              <label>Footer Logo Image URL</label>
-              <input
-                type="text"
-                value={footerLogoURL || ""}
-                onChange={(e) => setFooterLogoURL(e.target.value)}
-                placeholder="Paste footer logo image link here"
-              />
-            </div>
-            {footerLogoURL && (
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <span style={{ fontSize: "13px", color: "#888" }}>Preview (on footer):</span>
-                <div style={{ background: "#d32f2f", borderRadius: "8px", padding: "8px 16px", display: "flex", alignItems: "center" }}>
-                  <img
-                    src={footerLogoURL}
-                    alt="Footer logo preview"
-                    style={{ height: "40px", maxWidth: "150px", objectFit: "contain" }}
-                    onError={(e) => { e.target.style.display = "none"; }}
-                  />
-                </div>
-              </div>
-            )}
+            <CloudinaryUpload
+              id="cm-footer-logo"
+              label="Footer Logo Image"
+              required
+              value={footerLogoURL || ""}
+              onChange={setFooterLogoURL}
+              previewShape="wide"
+              previewStyle={{ height: "40px", maxWidth: "150px", objectFit: "contain" }}
+            />
           </div>
         </div>
 
@@ -249,23 +224,14 @@ function ContentManagement() {
                 )}
               </div>
 
-              <div className="form-group">
-                <label>Hero Section Slide Image URL</label>
-                <input
-                  type="text"
-                  value={slide.heroImageURL || ""}
-                  onChange={(e) => updateSlide(index, "heroImageURL", e.target.value)}
-                  placeholder="Paste image link here"
-                />
-                {slide.heroImageURL && (
-                  <img
-                    src={slide.heroImageURL}
-                    alt="Slide preview"
-                    style={{ marginTop: "8px", width: "80px", height: "80px", objectFit: "cover", borderRadius: "6px" }}
-                    onError={(e) => { e.target.style.display = "none"; }}
-                  />
-                )}
-              </div>
+              <CloudinaryUpload
+                id={`cm-slide-img-${index}`}
+                label="Hero Section Slide Image"
+                required
+                value={slide.heroImageURL || ""}
+                onChange={(url) => updateSlide(index, "heroImageURL", url)}
+                previewShape="wide"
+              />
             </div>
           </div>
         ))}

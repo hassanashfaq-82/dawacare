@@ -5,6 +5,7 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import toast from "../utils/toast";
 import { useSale } from "../contexts/SaleContext";
+import CloudinaryUpload from "../components/CloudinaryUpload";
 
 const nameOptions = [
   "Panadol Tablets 500mg", "Vitamin C 1000mg", "Glutamax Capsules",
@@ -12,12 +13,6 @@ const nameOptions = [
 ];
 const manufacturedByOptions = ["Pfizer", "GSK", "Abbott", "Sanofi", "Novartis"];
 const typeOptions = ["Tablet", "Capsule", "Syrup", "Injection", "Cream", "Drops", "Sachet", "Inhaler"];
-const pictureOptions = [
-  "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500",
-  "https://images.unsplash.com/photo-1585435557343-3b092031a831?w=500",
-  "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=500",
-  "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=500"
-];
 const descriptionOptions = [
   "Pain relief tablets", "Vitamin supplement",
   "Joint support capsules", "Anti-inflammatory medication"
@@ -282,28 +277,15 @@ function BulkAddProduct() {
                 />
               </div>
 
-              {/* Image URL — full width */}
-              <div className="form-group bulk-full-width">
-                <label>Product Image URL *</label>
-                <input
-                  type="text"
+              {/* Image Upload — full width */}
+              <div className="bulk-full-width">
+                <CloudinaryUpload
+                  id={`bulk-picture-${index}`}
+                  label="Product Image"
+                  required
                   value={product.picture}
-                  onChange={(e) => updateField(index, "picture", e.target.value)}
-                  list={`bulk-pictureOptions-${index}`}
-                  placeholder="Paste image link here"
+                  onChange={(url) => updateField(index, "picture", url)}
                 />
-                <datalist id={`bulk-pictureOptions-${index}`}>
-                  {pictureOptions.map((u, i) => <option key={i} value={u} />)}
-                </datalist>
-                {product.picture && (
-                  <img
-                    src={product.picture}
-                    alt="Preview"
-                    className="product-thumb"
-                    style={{ marginTop: "8px", width: "72px", height: "72px", objectFit: "cover", borderRadius: "6px" }}
-                    onError={(e) => { e.target.style.display = "none"; }}
-                  />
-                )}
               </div>
 
               {/* Description — full width */}

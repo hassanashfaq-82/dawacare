@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBox, faShoppingCart, faUsers, faClock } from "@fortawesome/free-solid-svg-icons";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase"; // apna firebase config
 import "./AdminPanel.css";
