@@ -1,5 +1,6 @@
 // src/AdminPanel/StockManagement.js
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import {
   collection,
@@ -14,6 +15,7 @@ import toast from "../utils/toast";
 const PAGE_SIZE_OPTIONS = [5, 15, 25, 50, 100, 200];
 
 function StockManagement() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,7 +86,15 @@ function StockManagement() {
 
   return (
     <div className="stock-management-page">
-      <h1 className="stock-title">Stock Management</h1>
+      <div className="stock-title-row">
+        <h1 className="stock-title">Stock Management</h1>
+        <button
+          className="bulk-add-data-btn"
+          onClick={() => navigate("../BulkAddProduct")}
+        >
+          <i className="fa-solid fa-layer-group"></i> Add Bulk Data
+        </button>
+      </div>
 
       {/* ── Summary Cards ── */}
       <div className="stock-stats-grid">

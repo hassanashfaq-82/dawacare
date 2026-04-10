@@ -11,6 +11,7 @@ import ContentManagement from "./ContentManagement";
 import ManageSale from "./ManageSale";
 import ManageBrands from "./ManageBrands";
 import StockManagement from "./StockManagement";
+import BulkAddProduct from "./BulkAddProduct";
 
 const Dashboard = () => {
   return (
@@ -30,6 +31,7 @@ const Dashboard = () => {
           <Route path="ProductList" element={<ProductList />} />
           <Route path="AddProduct" element={<AddProduct />} />
           <Route path="StockManagement" element={<StockManagement />} />
+          <Route path="BulkAddProduct" element={<BulkAddProduct />} />
           <Route path="ContentManagement" element={<ContentManagement />} />
           <Route path="ManageSale" element={<ManageSale />} />
           <Route path="ManageBrands" element={<ManageBrands />} />
